@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Empire Table</title>
+</head>
+<body>
+<h1>Empire Table</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Origin</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="empire : ${empires}">
+        <td th:text="${empire.name}"></td>
+        <td th:text="${empire.origin.name}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

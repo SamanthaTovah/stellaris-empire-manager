@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="create_origin_table" author="Samantha Tovah">
+        <createTable tableName="origin">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create_empire_table" author="Samantha Tovah">
+        <createTable tableName="empire">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="origin" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="empire" baseColumnNames="origin"
+                                     constraintName="fk_empire_origin"
+                                     referencedTableName="origin" referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="init_origin" author="Samantha Tovah">
+        <insert tableName="origin">
+            <column name="name" value="Prosperous Unification"/>
+        </insert>
+        <insert tableName="origin">
+            <column name="name" value="Scion"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="test empires" author="Samantha Tovah">
+        <insert tableName="empire">
+            <column name="name" value="Test Empire"/>
+            <column name="origin" value="1"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
