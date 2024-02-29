@@ -2,8 +2,10 @@ package io.github.samanthatovah.stellaris.empiremanager.controller;
 
 import io.github.samanthatovah.stellaris.empiremanager.model.*;
 import io.github.samanthatovah.stellaris.empiremanager.repository.*;
+import io.github.samanthatovah.stellaris.empiremanager.service.EmpireValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -19,11 +21,12 @@ public class EmpireController {
     private final TraitRepository traitRepository;
     private final SpeciesRepository speciesRepository;
     private final HomeworldRepository homeworldRepository;
+    private final EmpireValidator empireValidator;
 
     public EmpireController(EmpireRepository empireRepository, OriginRepository originRepository,
                             AppearanceRepository appearanceRepository, PlanetClassRepository planetClassRepository,
                             TraitRepository traitRepository, SpeciesRepository speciesRepository,
-                            HomeworldRepository homeworldRepository) {
+                            HomeworldRepository homeworldRepository, EmpireValidator empireValidator) {
         this.empireRepository = empireRepository;
         this.originRepository = originRepository;
         this.appearanceRepository = appearanceRepository;
@@ -31,6 +34,7 @@ public class EmpireController {
         this.traitRepository = traitRepository;
         this.speciesRepository = speciesRepository;
         this.homeworldRepository = homeworldRepository;
+        this.empireValidator = empireValidator;
     }
 
     @GetMapping("/empires")
@@ -47,21 +51,24 @@ public class EmpireController {
         newEmpire.setSpecies(new Species());
 
         model.addAttribute("empire", newEmpire);
-        model.addAttribute("appearances", appearanceRepository.findAll());
-        model.addAttribute("traits", traitRepository.findAll());
-        model.addAttribute("planetClasses", planetClassRepository.findAll());
-        model.addAttribute("origins", originRepository.findAll());
-        model.addAttribute("ethics", Arrays.stream(Ethic.values()).toList());
-        model.addAttribute("authorities", Arrays.stream(Authority.values()).toList());
+        populateEmpireFormModel(model);
 
         return "empire-form";
     }
 
     @PostMapping("/create-empire")
-    public String createEmpire(@ModelAttribute Empire empire) {
+    public String createEmpire(@ModelAttribute Empire empire, BindingResult result, Model model) {
+        empireValidator.validate(empire, result);
+
+        if (result.hasErrors()) {
+            populateEmpireFormModel(model);
+            return "empire-form";
+        }
+
         speciesRepository.save(empire.getSpecies());
         homeworldRepository.save(empire.getHomeworld());
         empireRepository.save(empire);
+
         return "redirect:/empires";
     }
 
@@ -70,5 +77,14 @@ public class EmpireController {
     public String deleteEmpire(@PathVariable("id") Long id) {
         empireRepository.deleteById(id);
         return "redirect:/empires";
+    }
+
+    private void populateEmpireFormModel(Model model) {
+        model.addAttribute("appearances", appearanceRepository.findAll());
+        model.addAttribute("traits", traitRepository.findAll());
+        model.addAttribute("planetClasses", planetClassRepository.findAll());
+        model.addAttribute("origins", originRepository.findAll());
+        model.addAttribute("ethics", Arrays.stream(Ethic.values()).toList());
+        model.addAttribute("authorities", Arrays.stream(Authority.values()).toList());
     }
 }
