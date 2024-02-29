@@ -1,16 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <changeSet id="create_origin_table" author="Samantha Tovah">
-        <createTable tableName="origin">
-            <column name="id" type="bigint" autoIncrement="true">
+    <changeSet id="create_appearance_table" author="Samantha Tovah">
+        <createTable tableName="appearance">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="name" type="varchar(255)">
+            <column name="name" type="VARCHAR(255)">
                 <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create_trait_table" author="Samantha Tovah">
+        <createTable tableName="trait">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create_planet_class_table" author="Samantha Tovah">
+        <createTable tableName="planet_class">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create_origin_table" author="Samantha Tovah">
+        <createTable tableName="origin">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create_species_table" author="Samantha Tovah">
+        <createTable tableName="species">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="appearance" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_species_appearance"
+                             referencedTableName="appearance" referencedColumnNames="id"/>
+            </column>
+        </createTable>
+        <createTable tableName="species_trait">
+            <column name="species_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="trait_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="species_trait" columnNames="species_id, trait_id" constraintName="pk_species_trait"/>
+        <addForeignKeyConstraint constraintName="fk_species_trait_species"
+                                 baseTableName="species_trait" baseColumnNames="species_id"
+                                 referencedTableName="species" referencedColumnNames="id"/>
+        <addForeignKeyConstraint constraintName="fk_species_trait_trait"
+                                 baseTableName="species_trait" baseColumnNames="trait_id"
+                                 referencedTableName="trait" referencedColumnNames="id"/>
+    </changeSet>
+
+
+    <changeSet id="create_homeworld_table" author="Samantha Tovah">
+        <createTable tableName="homeworld">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="homeworld_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="star_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="planet_class" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_homeworld_planet_class"
+                             references="planet_class(id)"/>
+            </column>
+            <column name="origin" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_homeworld_origin"
+                             references="origin(id)"/>
             </column>
         </createTable>
     </changeSet>
@@ -23,13 +109,15 @@
             <column name="name" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="origin" type="BIGINT">
-                <constraints nullable="true"/>
+            <column name="species" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_empire_species"
+                             references="species(id)"/>
+            </column>
+            <column name="homeworld" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_empire_homeworld"
+                             references="homeworld(id)"/>
             </column>
         </createTable>
-        <addForeignKeyConstraint baseTableName="empire" baseColumnNames="origin"
-                                     constraintName="fk_empire_origin"
-                                     referencedTableName="origin" referencedColumnNames="id"/>
     </changeSet>
 
     <changeSet id="init_origin" author="Samantha Tovah">
@@ -37,14 +125,409 @@
             <column name="name" value="Prosperous Unification"/>
         </insert>
         <insert tableName="origin">
+            <column name="name" value="Mechanist"/>
+        </insert>
+        <insert tableName="origin">
+            <column name="name" value="Syncretic Evolution"/>
+        </insert>
+        <insert tableName="origin">
+            <column name="name" value="Remants"/>
+        </insert>
+        <insert tableName="origin">
+            <column name="name" value="Shattered Ring"/>
+        </insert>
+        <insert tableName="origin">
+            <column name="name" value="Void Dwellers"/>
+        </insert>
+        <insert tableName="origin">
             <column name="name" value="Scion"/>
+        </insert>
+        <insert tableName="origin">
+            <column name="name" value="Galactic Doorstep"/>
+        </insert>
+        <insert tableName="origin">
+            <column name="name" value="Tree of Life"/>
+        </insert>
+        <insert tableName="origin">
+            <column name="name" value="On the Shoulders of Giants"/>
+        </insert>
+        <insert tableName="origin">
+            <column name="name" value="Calamitous Birth"/>
+        </insert>
+        <insert tableName="origin">
+            <column name="name" value="Resource Consolidation"/>
+        </insert>
+        <insert tableName="origin">
+            <column name="name" value="Common Ground"/>
+        </insert>
+        <insert tableName="origin">
+            <column name="name" value="Hegemon"/>
+        </insert>
+        <insert tableName="origin">
+            <column name="name" value="Doomsday"/>
+        </insert>
+        <insert tableName="origin">
+            <column name="name" value="Lost Colony"/>
+        </insert>
+        <insert tableName="origin">
+            <column name="name" value="Necrophage"/>
+        </insert>
+        <insert tableName="origin">
+            <column name="name" value="Here Be Dragons"/>
+        </insert>
+        <insert tableName="origin">
+            <column name="name" value="Ocean Paradise"/>
+        </insert>
+        <insert tableName="origin">
+            <column name="name" value="Progenitor Hive"/>
+        </insert>
+        <insert tableName="origin">
+            <column name="name" value="Subterranean"/>
+        </insert>
+        <insert tableName="origin">
+            <column name="name" value="Slingshot to the Stars"/>
+        </insert>
+        <insert tableName="origin">
+            <column name="name" value="Teachers of the Shroud"/>
+        </insert>
+        <insert tableName="origin">
+            <column name="name" value="Imperial Fiefdom"/>
+        </insert>
+        <insert tableName="origin">
+            <column name="name" value="Overtuned"/>
+        </insert>
+        <insert tableName="origin">
+            <column name="name" value="Knights of the Toxic God"/>
         </insert>
     </changeSet>
 
-    <changeSet id="test_empires" author="Samantha Tovah">
-        <insert tableName="empire">
-            <column name="name" value="Test Empire"/>
-            <column name="origin" value="1"/>
+    <changeSet id="init_appearance_table" author="Samantha Tovah">
+        <insert tableName="appearance">
+            <column name="name" value="Humanoid"/>
+        </insert>
+        <insert tableName="appearance">
+            <column name="name" value="Machine"/>
+        </insert>
+        <insert tableName="appearance">
+            <column name="name" value="Mammalian"/>
+        </insert>
+        <insert tableName="appearance">
+            <column name="name" value="Reptilian"/>
+        </insert>
+        <insert tableName="appearance">
+            <column name="name" value="Avian"/>
+        </insert>
+        <insert tableName="appearance">
+            <column name="name" value="Arthropoid"/>
+        </insert>
+        <insert tableName="appearance">
+            <column name="name" value="Molluscoid"/>
+        </insert>
+        <insert tableName="appearance">
+            <column name="name" value="Fungoid"/>
+        </insert>
+        <insert tableName="appearance">
+            <column name="name" value="Plantoid"/>
+        </insert>
+        <insert tableName="appearance">
+            <column name="name" value="Lithoid"/>
+        </insert>
+        <insert tableName="appearance">
+            <column name="name" value="Necroid"/>
+        </insert>
+        <insert tableName="appearance">
+            <column name="name" value="Aquatic"/>
+        </insert>
+        <insert tableName="appearance">
+            <column name="name" value="Toxoid"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="init_trait_table" author="Samantha Tovah">
+        <insert tableName="trait">
+            <column name="name" value="Aquatic"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Agrarian"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Ingenious"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Industrious"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Intelligent"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Thrifty"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Natural Engineers"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Natural Physicists"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Natural Sociologists"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Extremely Adaptive"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Adaptive"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Nonadaptive"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Rapid Breeders"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Slow Breeders"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Talented"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Quick Learners"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Slow Learners"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Traditional"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Quarrelsome"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Docile"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Unruly"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Very Strong"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Strong"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Weak"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Nomadic"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Sedentary"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Communal"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Solitary"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Charismatic"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Repugnant"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Conformists"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Deviants"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Venerable"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Enduring"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Fleeting"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Decadent"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Resilient"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Conservationist"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Wasteful"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Phototrophic"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Radiotrophic"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Budding"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Spliced Adaptability"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Juiced Power"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Farm Appendages"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Dedicated Miner"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Technical Talent"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Crafted Smiles"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Low Maintenance"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Augmented Intelligence"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Gene Mentorship"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Expressed Tradition"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Elevated Synapses"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Pre-Planned Growth"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Excessive Endurance"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Incubators"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Inorganic Breath"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Noxious"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Scintillating Skin"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Gaseous Breath"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Volatile Excretions"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Crystallization"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Power Drills"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Superconductive"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Efficient Processors"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Logic Engines"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Double-Jointed"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Bulky"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Enhanced Memory"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Emotion Emulators"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Uncanny"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Durable"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="High Maintenance"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Learning Algorithms"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Repurposed Hardware"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Mass-Produced"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Custom-Made"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Recycled"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Luxurious"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Streamlined Protocols"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="High Bandwidth"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="init_planet_class_table" author="Samantha Tovah">
+        <insert tableName="planet_class">
+            <column name="name" value="Desert World"/>
+        </insert>
+        <insert tableName="planet_class">
+            <column name="name" value="Arid World"/>
+        </insert>
+        <insert tableName="planet_class">
+            <column name="name" value="Savanna World"/>
+        </insert>
+        <insert tableName="planet_class">
+            <column name="name" value="Ocean World"/>
+        </insert>
+        <insert tableName="planet_class">
+            <column name="name" value="Continental World"/>
+        </insert>
+        <insert tableName="planet_class">
+            <column name="name" value="Tropical World"/>
+        </insert>
+        <insert tableName="planet_class">
+            <column name="name" value="Arctic World"/>
+        </insert>
+        <insert tableName="planet_class">
+            <column name="name" value="Alpine World"/>
+        </insert>
+        <insert tableName="planet_class">
+            <column name="name" value="Tundra World"/>
+        </insert>
+        <insert tableName="planet_class">
+            <column name="name" value="Relic World"/>
+        </insert>
+        <insert tableName="planet_class">
+            <column name="name" value="Shattered Ring World"/>
+        </insert>
+        <insert tableName="planet_class">
+            <column name="name" value="Orbital Habitats"/>
+        </insert>
+        <insert tableName="planet_class">
+            <column name="name" value="Machine World"/>
         </insert>
     </changeSet>
 

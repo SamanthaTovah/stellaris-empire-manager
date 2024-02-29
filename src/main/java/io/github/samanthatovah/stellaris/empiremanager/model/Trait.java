@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
-public class Origin {
+public class Trait {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

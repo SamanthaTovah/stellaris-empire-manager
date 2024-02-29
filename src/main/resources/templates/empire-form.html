@@ -7,14 +7,48 @@
 <body>
 <h1>Create New Empire</h1>
 <form action="#" method="post" th:action="@{/create-empire}" th:object="${empire}">
-    <label for="name">Name:</label>
+    <label for="name">Empire Name:</label>
     <input id="name" name="name" th:value="*{name}" type="text"/>
 
+    <!-- Species Information -->
+    <label for="speciesName">Species Name:</label>
+    <input id="speciesName" name="species.name" th:value="*{species.name}" type="text"/>
+
+    <label for="appearance">Appearance:</label>
+    <select id="appearance" name="species.appearance.id">
+        <option th:each="appearance : ${appearances}"
+                th:text="${appearance.name}"
+                th:value="${appearance.id}">Appearance
+        </option>
+    </select>
+    <label for="traits">Traits:</label>
+    <select id="traits" multiple="multiple" name="species.traits">
+        <option th:each="trait : ${traits}"
+                th:text="${trait.name}"
+                th:value="${trait.id}">Trait
+        </option>
+    </select>
+
+    <!-- Homeworld Information -->
+    <label for="homeworldName">Homeworld Name:</label>
+    <input id="homeworldName" name="homeworld.homeworldName" th:value="*{homeworld.homeworldName}" type="text"/>
+
+    <label for="starName">Star Name:</label>
+    <input id="starName" name="homeworld.starName" th:value="*{homeworld.starName}" type="text"/>
+
+    <label for="planetClass">Planet Class:</label>
+    <select id="planetClass" name="homeworld.planetClass.id">
+        <option th:each="planetClass : ${planetClasses}"
+                th:text="${planetClass.name}"
+                th:value="${planetClass.id}">Planet Class
+        </option>
+    </select>
+
     <label for="origin">Origin:</label>
-    <select id="origin" name="origin">
+    <select id="origin" name="homeworld.origin.id">
         <option th:each="origin : ${origins}"
                 th:text="${origin.name}"
-                th:value="${origin.id}">Origin Name
+                th:value="${origin.id}">Origin
         </option>
     </select>
 

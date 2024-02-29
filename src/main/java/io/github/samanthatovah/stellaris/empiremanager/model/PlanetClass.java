@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
-public class Origin {
+public class PlanetClass {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

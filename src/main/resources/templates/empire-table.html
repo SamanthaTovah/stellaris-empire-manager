@@ -9,7 +9,13 @@
 <table>
     <thead>
     <tr>
-        <th>Name</th>
+        <th>Empire Name</th>
+        <th>Species Name</th>
+        <th>Appearance</th>
+        <th>Traits</th>
+        <th>Homeworld Name</th>
+        <th>Star Name</th>
+        <th>Planet Class</th>
         <th>Origin</th>
         <th>Action</th>
     </tr>
@@ -17,14 +23,24 @@
     <tbody>
     <tr th:each="empire : ${empires}">
         <td th:text="${empire.name}"></td>
-        <td th:text="${empire.origin.name}"></td>
+        <td th:text="${empire.species.name}"></td>
+        <td th:text="${empire.species.appearance.name}"></td>
+        <td>
+            <span th:each="trait : ${empire.species.traits}">
+                <span th:text="${trait.name}"></span><span
+                    th:if="${traitStat.index + 1} &lt; ${empire.species.traits.size()}">, </span>
+            </span>
+        </td>
+        <td th:text="${empire.homeworld.homeworldName}"></td>
+        <td th:text="${empire.homeworld.starName}"></td>
+        <td th:text="${empire.homeworld.planetClass.name}"></td>
+        <td th:text="${empire.homeworld.origin.name}"></td>
         <td>
             <button th:onclick="'confirmDelete(' + ${empire.id} + ');'" type="button">Delete</button>
         </td>
     </tr>
     </tbody>
 </table>
-
 <script src="/js/empireTable.js"></script>
 </body>
 </html>

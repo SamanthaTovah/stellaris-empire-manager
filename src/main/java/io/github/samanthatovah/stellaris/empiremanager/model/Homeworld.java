@@ -7,20 +7,23 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
-public class Empire {
+public class Homeworld {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String name;
+    private String homeworldName;
+
+    @Column(nullable = false)
+    private String starName;
 
     @ManyToOne
-    @JoinColumn(name = "species", nullable = false)
-    private Species species;
+    @JoinColumn(name = "planet_class", nullable = false)
+    private PlanetClass planetClass;
 
     @ManyToOne
-    @JoinColumn(name = "homeworld", nullable = false)
-    private Homeworld homeworld;
+    @JoinColumn(name = "origin", nullable = false)
+    private Origin origin;
 }
