@@ -41,7 +41,7 @@
         </insert>
     </changeSet>
 
-    <changeSet id="test empires" author="Samantha Tovah">
+    <changeSet id="test_empires" author="Samantha Tovah">
         <insert tableName="empire">
             <column name="name" value="Test Empire"/>
             <column name="origin" value="1"/>
