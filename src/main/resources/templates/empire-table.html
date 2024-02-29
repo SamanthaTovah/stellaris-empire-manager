@@ -38,15 +38,15 @@
         <td th:text="${empire.homeworld.planetClass.name}"></td>
         <td th:text="${empire.homeworld.origin.name}"></td>
         <td>
-            <button th:onclick="'confirmDelete(' + ${empire.id} + ');'" type="button">Delete</button>
-        </td>
-        <td>
             <span th:each="ethic : ${empire.ethics}">
                 <span th:text="${ethic}"></span><span
                     th:if="${ethicStat.index + 1} &lt; ${empire.ethics.size()}">, </span>
             </span>
         </td>
         <td th:text="${empire.authority}"></td>
+        <td>
+            <button th:onclick="'confirmDelete(' + ${empire.id} + ');'" type="button">Delete</button>
+        </td>
     </tr>
     </tbody>
 </table>
