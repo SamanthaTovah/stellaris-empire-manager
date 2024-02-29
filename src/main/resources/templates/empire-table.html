@@ -11,14 +11,20 @@
     <tr>
         <th>Name</th>
         <th>Origin</th>
+        <th>Action</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="empire : ${empires}">
         <td th:text="${empire.name}"></td>
         <td th:text="${empire.origin.name}"></td>
+        <td>
+            <button th:onclick="'confirmDelete(' + ${empire.id} + ');'" type="button">Delete</button>
+        </td>
     </tr>
     </tbody>
 </table>
+
+<script src="/js/empireTable.js"></script>
 </body>
 </html>
