@@ -52,6 +52,23 @@
         </option>
     </select>
 
+    <!-- Government Information -->
+    <label for="ethics">Ethics:</label>
+    <select id="ethics" multiple="multiple" name="ethics">
+        <option th:each="ethic : ${ethics}"
+                th:text="${ethic}"
+                th:value="${ethic}">Ethic
+        </option>
+    </select>
+
+    <label for="authority">Authority:</label>
+    <select id="authority" name="authority">
+        <option th:each="authority : ${authorities}"
+                th:text="${authority}"
+                th:value="${authority}">Authority
+        </option>
+    </select>
+
     <button type="submit">Submit</button>
 </form>
 </body>

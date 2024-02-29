@@ -117,7 +117,23 @@
                 <constraints nullable="false" foreignKeyName="fk_empire_homeworld"
                              references="homeworld(id)"/>
             </column>
+            <column name="authority" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
+
+        <createTable tableName="empire_ethics">
+            <column name="empire" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ethic" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="fk_empire_ethics_empire"
+                                 baseTableName="empire_ethics" baseColumnNames="empire"
+                                 referencedTableName="empire" referencedColumnNames="id"/>
     </changeSet>
 
     <changeSet id="init_origin" author="Samantha Tovah">

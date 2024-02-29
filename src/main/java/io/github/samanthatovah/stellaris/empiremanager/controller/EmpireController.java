@@ -1,13 +1,12 @@
 package io.github.samanthatovah.stellaris.empiremanager.controller;
 
-import io.github.samanthatovah.stellaris.empiremanager.model.Empire;
-import io.github.samanthatovah.stellaris.empiremanager.model.Homeworld;
-import io.github.samanthatovah.stellaris.empiremanager.model.Species;
+import io.github.samanthatovah.stellaris.empiremanager.model.*;
 import io.github.samanthatovah.stellaris.empiremanager.repository.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -52,6 +51,8 @@ public class EmpireController {
         model.addAttribute("traits", traitRepository.findAll());
         model.addAttribute("planetClasses", planetClassRepository.findAll());
         model.addAttribute("origins", originRepository.findAll());
+        model.addAttribute("ethics", Arrays.stream(Ethic.values()).toList());
+        model.addAttribute("authorities", Arrays.stream(Authority.values()).toList());
 
         return "empire-form";
     }

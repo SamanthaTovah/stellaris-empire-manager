@@ -17,6 +17,8 @@
         <th>Star Name</th>
         <th>Planet Class</th>
         <th>Origin</th>
+        <th>Ethics</th>
+        <th>Authority</th>
         <th>Action</th>
     </tr>
     </thead>
@@ -38,6 +40,13 @@
         <td>
             <button th:onclick="'confirmDelete(' + ${empire.id} + ');'" type="button">Delete</button>
         </td>
+        <td>
+            <span th:each="ethic : ${empire.ethics}">
+                <span th:text="${ethic}"></span><span
+                    th:if="${ethicStat.index + 1} &lt; ${empire.ethics.size()}">, </span>
+            </span>
+        </td>
+        <td th:text="${empire.authority}"></td>
     </tr>
     </tbody>
 </table>
