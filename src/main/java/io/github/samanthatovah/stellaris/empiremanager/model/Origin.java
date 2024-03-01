@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
+@Table(name = "origin")
 public class Origin implements Comparable<Origin> {
 
     @Id

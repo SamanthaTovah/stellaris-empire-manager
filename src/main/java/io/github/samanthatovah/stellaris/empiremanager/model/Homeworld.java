@@ -7,16 +7,17 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
+@Table(name = "homeworld")
 public class Homeworld {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "homeworld_name", nullable = false)
     private String homeworldName;
 
-    @Column(nullable = false)
+    @Column(name = "star_name", nullable = false)
     private String starName;
 
     @ManyToOne

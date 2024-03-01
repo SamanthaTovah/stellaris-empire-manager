@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
+@Table(name = "appearance")
 public class Appearance implements Comparable<Appearance> {
 
     @Id

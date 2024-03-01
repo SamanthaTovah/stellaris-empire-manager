@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
+@Table(name = "trait")
 public class Trait implements Comparable<Trait> {
 
     @Id

@@ -71,10 +71,10 @@
     </select>
 
     <label for="government">Government:</label>
-    <select id="government" name="government">
+    <select id="government" name="government.id">
         <option th:each="government : ${governments}"
                 th:text="${government.name}"
-                th:value="${government}">Government
+                th:value="${government.id}">Government
         </option>
     </select>
 
