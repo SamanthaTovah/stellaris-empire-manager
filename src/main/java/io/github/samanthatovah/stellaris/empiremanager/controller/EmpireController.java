@@ -22,13 +22,14 @@ public class EmpireController {
     private final SpeciesRepository speciesRepository;
     private final HomeworldRepository homeworldRepository;
     private final CivicRepository civicRepository;
+    private final GovernmentRepository governmentRepository;
     private final EmpireValidator empireValidator;
 
     public EmpireController(EmpireRepository empireRepository, OriginRepository originRepository,
                             AppearanceRepository appearanceRepository, PlanetClassRepository planetClassRepository,
                             TraitRepository traitRepository, SpeciesRepository speciesRepository,
                             HomeworldRepository homeworldRepository, CivicRepository civicRepository,
-                            EmpireValidator empireValidator) {
+                            GovernmentRepository governmentRepository, EmpireValidator empireValidator) {
         this.empireRepository = empireRepository;
         this.originRepository = originRepository;
         this.appearanceRepository = appearanceRepository;
@@ -37,6 +38,7 @@ public class EmpireController {
         this.speciesRepository = speciesRepository;
         this.homeworldRepository = homeworldRepository;
         this.civicRepository = civicRepository;
+        this.governmentRepository = governmentRepository;
         this.empireValidator = empireValidator;
     }
 
@@ -90,5 +92,6 @@ public class EmpireController {
         model.addAttribute("ethics", Arrays.stream(Ethic.values()).toList());
         model.addAttribute("authorities", Arrays.stream(Authority.values()).toList());
         model.addAttribute("civics", civicRepository.findAll());
+        model.addAttribute("governments", governmentRepository.findAll());
     }
 }

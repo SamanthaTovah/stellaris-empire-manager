@@ -78,7 +78,6 @@
                                  referencedTableName="trait" referencedColumnNames="id"/>
     </changeSet>
 
-
     <changeSet id="create_homeworld_table" author="Samantha Tovah">
         <createTable tableName="homeworld">
             <column name="id" type="BIGINT" autoIncrement="true">
@@ -111,6 +110,17 @@
             </column>
         </createTable>
     </changeSet>
+    
+    <changeSet id="create_government_table" author="Samantha Tovah">
+        <createTable tableName="government">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
 
     <changeSet id="create_empire_table" author="Samantha Tovah">
         <createTable tableName="empire">
@@ -130,6 +140,10 @@
             </column>
             <column name="authority" type="VARCHAR(255)">
                 <constraints nullable="false"/>
+            </column>
+            <column name="government" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_empire_government"
+                             references="government(id)"/>
             </column>
         </createTable>
 
@@ -844,6 +858,204 @@
         </insert>
         <insert tableName="civic">
             <column name="name" value="Zero-Waste Protocols"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="init_government_table" author="Samantha Tovah">
+        <insert tableName="government">
+            <column name="name" value="Representative Democracy"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Plutocratic Oligarchy"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Constitutional Dictatorship"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Despotic Empire"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Communal Parity"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Elective Monarchy"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Enlightened Monarchy"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Feudal Empire"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Theocratic Republic"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Theocratic Oligarchy"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Theocratic Dictatorship"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Theocratic Monarchy"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Holy Tribunal"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Celestial Empire"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Divine Empire"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Moral Democracy"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Irenic Bureacracy"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Irenic Dictatorship"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Irenic Monarchy"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Military Commissariat"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Military Junta"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Military Dictatorship"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Star Empire"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Assembly of Clans"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="War Council"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Martial Dictatorship"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Martial Empire"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Citizen Republic"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Citizen Stratocracy"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Direct Democracy"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Executive Committee"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Totalitarian Regime"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Despotic Hegemony"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Rational Consensus"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Science Directorate"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Technocratic Dictatorship"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Illuminated Autocracy"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Grim Council"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Mortal Empire"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Bandit Commune"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Bandit Kingdom"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Band of Blood"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Defensive Union"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Dimensional Covenant"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Purity Assembly"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Purification Committee"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Purity Order"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Blood Court"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Megacorporation"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Trade League"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="MegaChurch"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Worker Cooperative"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Criminal Syndicate"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Pirate Haven"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Subversive Cult"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Sacrificial MegaChurch"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Collective Consciousness"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Ravenous Hive"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Parasitic Overmind"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Artificial Intelligence Network"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Rogue Defense System"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Autonomous Service Grid"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Catalog Index"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Intelligent Research Link"/>
+        </insert>
+        <insert tableName="government">
+            <column name="name" value="Industrious Production Core"/>
         </insert>
     </changeSet>
 

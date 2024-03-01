@@ -19,6 +19,7 @@
         <th>Origin</th>
         <th>Ethics</th>
         <th>Authority</th>
+        <th>Government</th>
         <th>Civics</th>
         <th>Action</th>
     </tr>
@@ -64,6 +65,9 @@
         </td>
         <td th:text="${empire.authority}">
             Oligarchic
+        </td>
+        <td th:text="${empire.government}">
+            Science Directorate
         </td>
         <td>
             <span th:each="civic : ${empire.civics}">

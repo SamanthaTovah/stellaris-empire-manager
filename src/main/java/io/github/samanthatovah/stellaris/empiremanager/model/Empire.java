@@ -44,4 +44,8 @@ public class Empire {
             inverseJoinColumns = @JoinColumn(name = "civic_id")
     )
     private Set<Civic> civics = new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "government", nullable = false)
+    private Homeworld government;
 }

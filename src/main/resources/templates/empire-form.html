@@ -70,6 +70,14 @@
         </option>
     </select>
 
+    <label for="government">Origin:</label>
+    <select id="government" name="government">
+        <option th:each="government : ${governments}"
+                th:text="${government.name}"
+                th:value="${government.id}">Government
+        </option>
+    </select>
+
     <label for="civics">Civics:</label>
     <select id="civics" multiple="multiple" name="civics">
         <option th:each="civic : ${civics}"
