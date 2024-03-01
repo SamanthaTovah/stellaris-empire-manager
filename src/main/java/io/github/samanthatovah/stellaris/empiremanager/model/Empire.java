@@ -47,5 +47,5 @@ public class Empire {
 
     @ManyToOne
     @JoinColumn(name = "government", nullable = false)
-    private Homeworld government;
+    private Government government;
 }

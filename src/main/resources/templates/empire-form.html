@@ -70,11 +70,11 @@
         </option>
     </select>
 
-    <label for="government">Origin:</label>
+    <label for="government">Government:</label>
     <select id="government" name="government">
         <option th:each="government : ${governments}"
                 th:text="${government.name}"
-                th:value="${government.id}">Government
+                th:value="${government}">Government
         </option>
     </select>
 
