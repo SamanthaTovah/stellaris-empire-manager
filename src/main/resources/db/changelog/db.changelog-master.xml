@@ -110,7 +110,7 @@
             </column>
         </createTable>
     </changeSet>
-    
+
     <changeSet id="create_government_table" author="Samantha Tovah">
         <createTable tableName="government">
             <column name="id" type="BIGINT" autoIncrement="true">
@@ -764,7 +764,7 @@
             <column name="name" value="Private Military Companies"/>
         </insert>
         <insert tableName="civic">
-            <column name="name" value="Relentless Industrialists"/>
+            <column name="name" value="Relentless Industrialists (Corporate)"/>
         </insert>
         <insert tableName="civic">
             <column name="name" value="Ascetic"/>
@@ -779,7 +779,7 @@
             <column name="name" value="Empath"/>
         </insert>
         <insert tableName="civic">
-            <column name="name" value="Memorialists"/>
+            <column name="name" value="Memorialists (Hive Mind)"/>
         </insert>
         <insert tableName="civic">
             <column name="name" value="Natural Neural Network"/>
@@ -830,7 +830,7 @@
             <column name="name" value="Maintenance Protocols"/>
         </insert>
         <insert tableName="civic">
-            <column name="name" value="Memorialists"/>
+            <column name="name" value="Memorialists (Machine Intelligence)"/>
         </insert>
         <insert tableName="civic">
             <column name="name" value="OTA Updates"/>
