@@ -19,6 +19,7 @@
         <th>Origin</th>
         <th>Ethics</th>
         <th>Authority</th>
+        <th>Civics</th>
         <th>Action</th>
     </tr>
     </thead>
@@ -29,8 +30,8 @@
         <td th:text="${empire.species.appearance.name}"></td>
         <td>
             <span th:each="trait : ${empire.species.traits}">
-                <span th:text="${trait.name}"></span><span
-                    th:if="${traitStat.index + 1} &lt; ${empire.species.traits.size()}">, </span>
+                <span th:text="${trait.name}"></span>
+                <span th:if="${traitStat.index + 1} &lt; ${empire.species.traits.size()}">, </span>
             </span>
         </td>
         <td th:text="${empire.homeworld.homeworldName}"></td>
@@ -39,11 +40,17 @@
         <td th:text="${empire.homeworld.origin.name}"></td>
         <td>
             <span th:each="ethic : ${empire.ethics}">
-                <span th:text="${ethic}"></span><span
-                    th:if="${ethicStat.index + 1} &lt; ${empire.ethics.size()}">, </span>
+                <span th:text="${ethic}"></span>
+                <span th:if="${ethicStat.index + 1} &lt; ${empire.ethics.size()}">, </span>
             </span>
         </td>
         <td th:text="${empire.authority}"></td>
+        <td>
+            <span th:each="civic : ${empire.civics}">
+                <span th:text="${civic.name}"></span>
+                <span th:if="${civicStat.index + 1} &lt; ${empire.civics.size()}">, </span>
+            </span>
+        </td>
         <td>
             <button th:onclick="'confirmDelete(' + ${empire.id} + ');'" type="button">Delete</button>
         </td>

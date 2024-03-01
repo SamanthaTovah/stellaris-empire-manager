@@ -21,6 +21,7 @@
                 th:value="${appearance.id}">Appearance
         </option>
     </select>
+
     <label for="traits">Traits:</label>
     <select id="traits" multiple="multiple" name="species.traits">
         <option th:each="trait : ${traits}"
@@ -66,6 +67,14 @@
         <option th:each="authority : ${authorities}"
                 th:text="${authority}"
                 th:value="${authority}">Authority
+        </option>
+    </select>
+
+    <label for="civics">Civics:</label>
+    <select id="civics" multiple="multiple" name="civics">
+        <option th:each="civic : ${civics}"
+                th:text="${civic.name}"
+                th:value="${civic.id}">Civic
         </option>
     </select>
 

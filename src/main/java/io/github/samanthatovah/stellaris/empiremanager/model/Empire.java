@@ -36,4 +36,12 @@ public class Empire {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Authority authority;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "empire_civic",
+            joinColumns = @JoinColumn(name = "empire_id"),
+            inverseJoinColumns = @JoinColumn(name = "civic_id")
+    )
+    private Set<Civic> civics = new HashSet<>();
 }

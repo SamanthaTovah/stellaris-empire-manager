@@ -101,6 +101,17 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="create_civic_table" author="Samantha Tovah">
+        <createTable tableName="civic">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
     <changeSet id="create_empire_table" author="Samantha Tovah">
         <createTable tableName="empire">
             <column name="id" type="BIGINT" autoIncrement="true">
@@ -134,6 +145,22 @@
         <addForeignKeyConstraint constraintName="fk_empire_ethics_empire"
                                  baseTableName="empire_ethics" baseColumnNames="empire"
                                  referencedTableName="empire" referencedColumnNames="id"/>
+
+        <createTable tableName="empire_civic">
+            <column name="empire_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="civic_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="empire_civic" columnNames="empire_id, civic_id" constraintName="pk_empire_civic"/>
+        <addForeignKeyConstraint constraintName="fk_empire_civic_empire"
+                                 baseTableName="empire_civic" baseColumnNames="empire_id"
+                                 referencedTableName="empire" referencedColumnNames="id"/>
+        <addForeignKeyConstraint constraintName="fk_empire_civic_civic"
+                                 baseTableName="empire_civic" baseColumnNames="civic_id"
+                                 referencedTableName="civic" referencedColumnNames="id"/>
     </changeSet>
 
     <changeSet id="init_origin" author="Samantha Tovah">
@@ -544,6 +571,279 @@
         </insert>
         <insert tableName="planet_class">
             <column name="name" value="Machine World"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="init_civic_table" author="Samantha Tovah">
+        <insert tableName="civic">
+            <column name="name" value="Anglers"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Byzantine Bureaucracy"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Catalytic Processing"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Corvée System"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Cutthroat Politics"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Diplomatic Corps"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Efficient Bureaucracy"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Environmentalist"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Functional Architecture"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Memorialists"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Merchant Guilds"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Meritocracy"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Mining Guilds"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Mutagenic Spas"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Parliamentary System"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Police State"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Reanimators"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Scavengers"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Shadow Council"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Agrarian Idyll"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Aristocratic Elite"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Beacon of Liberty"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Citizen Service"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Death Cult"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Distinguished Admiralty"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Exalted Priesthood"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Fanatic Purifiers"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Feudal Society"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Free Haven"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Idealistic Foundation"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Idyllic Bloom"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Imperial Cult"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Inward Perfection"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Nationalistic Zeal"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Philosopher King"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Relentless Industrialists"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Shared Burdens"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Slaver Guilds"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Technocracy"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Warrior Culture"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Anglers (Corporate)"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Brand Loyalty"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Catalytic Recyclers"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Criminal Heritage"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Franchising"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Free Traders"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Media Conglomerate"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Mutagenic Spas (Corporate)"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Permanent Employment"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Private Prospectors"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Public Relations Specialists"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Ruthless Competition"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Scavengers (Corporate)"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Trading Posts"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Corporate Death Cult"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Gospel of the Masses"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Indentured Assets"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Private Military Companies"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Relentless Industrialists"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Ascetic"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Devouring Swarm"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Divided Attention"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Empath"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Memorialists"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Natural Neural Network"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="One Mind"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Organic Reprocessing"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Permutation Pools"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Strength of Legions"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Subspace Ephapse"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Subsumed Will"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Idyllic Bloom (Hive Mind)"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Constructobot"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Delegated Functions"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Determined Exterminator"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Driven Assimilator"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Factory Overclocking"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Hyper Lubrication Basin"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Introspective"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Maintenance Protocols"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Memorialists"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="OTA Updates"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Organic Reprocessing (Hive Mind)"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Rapid Replicator"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Rockbreakers"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Rogue Servitor"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Static Research Analysis"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Unitary Cohesion"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Warbots"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Zero-Waste Protocols"/>
         </insert>
     </changeSet>
 
