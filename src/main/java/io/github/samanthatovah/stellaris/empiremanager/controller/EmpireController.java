@@ -85,13 +85,13 @@ public class EmpireController {
     }
 
     private void populateEmpireFormModel(Model model) {
-        model.addAttribute("appearances", appearanceRepository.findAll());
-        model.addAttribute("traits", traitRepository.findAll());
-        model.addAttribute("planetClasses", planetClassRepository.findAll());
-        model.addAttribute("origins", originRepository.findAll());
+        model.addAttribute("appearances", appearanceRepository.findAll().stream().sorted());
+        model.addAttribute("traits", traitRepository.findAll().stream().sorted());
+        model.addAttribute("planetClasses", planetClassRepository.findAll().stream().sorted());
+        model.addAttribute("origins", originRepository.findAll().stream().sorted());
         model.addAttribute("ethics", Arrays.stream(Ethic.values()).toList());
         model.addAttribute("authorities", Arrays.stream(Authority.values()).toList());
-        model.addAttribute("civics", civicRepository.findAll());
-        model.addAttribute("governments", governmentRepository.findAll());
+        model.addAttribute("civics", civicRepository.findAll().stream().sorted());
+        model.addAttribute("governments", governmentRepository.findAll().stream().sorted());
     }
 }

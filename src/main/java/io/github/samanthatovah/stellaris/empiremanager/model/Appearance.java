@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
-public class Appearance {
+public class Appearance implements Comparable<Appearance> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,4 +15,9 @@ public class Appearance {
 
     @Column(nullable = false)
     private String name;
+
+    @Override
+    public int compareTo(Appearance appearance) {
+        return getName().compareTo(appearance.getName());
+    }
 }

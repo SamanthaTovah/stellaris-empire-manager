@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
-public class Trait {
+public class Trait implements Comparable<Trait> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,4 +15,9 @@ public class Trait {
 
     @Column(nullable = false)
     private String name;
+
+    @Override
+    public int compareTo(Trait trait) {
+        return getName().compareTo(trait.getName());
+    }
 }
