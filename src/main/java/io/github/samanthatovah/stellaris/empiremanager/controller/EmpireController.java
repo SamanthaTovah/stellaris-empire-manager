@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class EmpireController {
@@ -47,6 +48,13 @@ public class EmpireController {
         List<Empire> empires = empireRepository.findAll();
         model.addAttribute("empires", empires);
         return "empire-table";
+    }
+
+    @GetMapping("/empire/{id}")
+    public String showEmpireDetails(@PathVariable("id") Long id, Model model) {
+        Optional<Empire> empire = empireRepository.findById(id);
+        model.addAttribute("empire", empire.orElseThrow());
+        return "empire-details";
     }
 
     @GetMapping("/create-empire")

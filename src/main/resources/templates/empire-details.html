@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Empire Details</title>
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body class="main-body">
+<div class="container">
+    <h1>Empire Details</h1>
+    <div class="empire-table">
+        <div class="detail-item empire-table-header"><strong>Empire Name</strong></div>
+        <div class="detail-item"><span th:text="${empire.name}">Empire Name Here</span></div>
+
+        <div class="detail-item empire-table-header"><strong>Species Name</strong></div>
+        <div class="detail-item"><span th:text="${empire.species.name}">Species Name Here</span></div>
+
+        <div class="detail-item empire-table-header"><strong>Appearance</strong></div>
+        <div class="detail-item"><span th:text="${empire.species.appearance.name}">Appearance Here</span></div>
+
+        <div class="detail-item empire-table-header"><strong>Traits</strong></div>
+        <div class="detail-item">
+            <span th:each="trait : ${empire.species.traits}">
+                <span th:text="${trait.name}">Trait Name Here</span><span
+                    th:if="${traitStat.index + 1} &lt; ${empire.species.traits.size()}">, </span>
+            </span>
+        </div>
+
+        <div class="detail-item empire-table-header"><strong>Homeworld Name</strong></div>
+        <div class="detail-item"><span th:text="${empire.homeworld.homeworldName}">Homeworld Name Here</span></div>
+
+        <div class="detail-item empire-table-header"><strong>Star Name</strong></div>
+        <div class="detail-item"><span th:text="${empire.homeworld.starName}">Star Name Here</span></div>
+
+        <div class="detail-item empire-table-header"><strong>Planet Class</strong></div>
+        <div class="detail-item"><span th:text="${empire.homeworld.planetClass.name}">Planet Class Here</span></div>
+
+        <div class="detail-item empire-table-header"><strong>Origin</strong></div>
+        <div class="detail-item"><span th:text="${empire.homeworld.origin.name}">Origin Here</span></div>
+
+        <div class="detail-item empire-table-header"><strong>Ethics</strong></div>
+        <div class="detail-item">
+            <span th:each="ethic : ${empire.ethics}">
+                <span th:text="${ethic}">Ethic Here</span><span
+                    th:if="${ethicStat.index + 1} &lt; ${empire.ethics.size()}">, </span>
+            </span>
+        </div>
+
+        <div class="detail-item empire-table-header"><strong>Authority</strong></div>
+        <div class="detail-item"><span th:text="${empire.authority}">Authority Here</span></div>
+
+        <div class="detail-item empire-table-header"><strong>Government</strong></div>
+        <div class="detail-item"><span th:text="${empire.government.name}">Government Type Here</span></div>
+
+        <div class="detail-item empire-table-header"><strong>Civics</strong></div>
+        <div class="detail-item">
+            <span th:each="civic : ${empire.civics}">
+                <span th:text="${civic.name}">Civic Here</span><span
+                    th:if="${civicStat.index + 1} &lt; ${empire.civics.size()}">, </span>
+            </span>
+        </div>
+    </div>
+</div>
+</body>
+</html>

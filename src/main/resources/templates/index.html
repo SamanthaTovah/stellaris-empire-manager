@@ -3,14 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome to Stellaris Empire Manager</title>
+    <link href="/css/style.css" rel="stylesheet">
 </head>
-<body>
-<h1>Welcome to Stellaris Empire Manager</h1>
-<p>This is a brief blurb about the project.</p>
-
-<h2>Navigation</h2>
-<a href="/empires">View Custom Empires</a>
-<br>
-<a href="/create-empire">Create Custom Empire</a>
+<body class="main-body">
+<div class="container">
+    <h1>Welcome to Stellaris Empire Manager</h1>
+    <p>The Stellaris Empire Manager is a web application designed for the organization and management of custom
+        Stellaris game empires. It utilizes Docker for consistent deployment environments and Spring Boot for
+        streamlined application development. Security is managed through Spring Security, ensuring protected access,
+        while the integration with a MySQL database allows for persistent data management.</p>
+    <h2>Navigation</h2>
+    <a class="nav-link" href="/empires">View Custom Empires</a>
+    <br>
+    <a class="nav-link" href="/create-empire">Create Custom Empire</a>
+</div>
 </body>
 </html>

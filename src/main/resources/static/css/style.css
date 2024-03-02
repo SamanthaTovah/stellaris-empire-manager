@@ -1,0 +1,92 @@
+body.main-body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1, h2 {
+    color: #333;
+}
+
+.nav-link {
+    display: inline-block;
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px 15px;
+    margin: 5px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.empire-table, .empire-details {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.empire-table, .empire-table th, .empire-table td, empire-details, .empire-details th, .empire-details td {
+    border: 1px solid #ddd;
+}
+
+.empire-table-header {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+.empire-table th, .empire-table td, .detail-item {
+    padding: 10px;
+    text-align: left;
+}
+
+.empire-form label, .empire-form input, .empire-form select {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.empire-form input, .empire-form select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+}
+
+.submit-btn {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.submit-btn:hover {
+    background-color: #0056b3;
+}
+
+.action-buttons {
+    margin-top: 20px;
+}
+
+.action-buttons button, .action-buttons .nav-link {
+    margin-right: 10px;
+    text-decoration: none;
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.action-buttons button:hover, .action-buttons .nav-link:hover {
+    background-color: #0056b3;
+}

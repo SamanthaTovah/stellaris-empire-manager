@@ -3,88 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Empire Table</title>
+    <link href="/css/style.css" rel="stylesheet">
 </head>
-<body>
-<h1>Empire Table</h1>
-<table>
-    <thead>
-    <tr>
-        <th>Empire Name</th>
-        <th>Species Name</th>
-        <th>Appearance</th>
-        <th>Traits</th>
-        <th>Homeworld Name</th>
-        <th>Star Name</th>
-        <th>Planet Class</th>
-        <th>Origin</th>
-        <th>Ethics</th>
-        <th>Authority</th>
-        <th>Government</th>
-        <th>Civics</th>
-        <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="empire : ${empires}">
-        <td th:text="${empire.name}">
-            Saathid Directorate
-        </td>
-        <td th:text="${empire.species.name}">
-            Saathid
-        </td>
-        <td th:text="${empire.species.appearance.name}">
-            Arthropoid
-        </td>
-        <td>
-            <span th:each="trait : ${empire.species.traits}">
-                <span th:text="${trait.name}">
-                    Intelligent, Docile, Solitary, Fleeting
-                </span>
-                <span th:if="${traitStat.index + 1} &lt; ${empire.species.traits.size()}">, </span>
-            </span>
-        </td>
-        <td th:text="${empire.homeworld.homeworldName}">
-            Saathurna
-        </td>
-        <td th:text="${empire.homeworld.starName}">
-            Saathar
-        </td>
-        <td th:text="${empire.homeworld.planetClass.name}">
-            Shattered Ring World
-        </td>
-        <td th:text="${empire.homeworld.origin.name}">
-            Shattered Ring
-        </td>
-        <td>
-            <span th:each="ethic : ${empire.ethics}">
-                <span th:text="${ethic}">
-                    Xenophobe, Pacifist, Materialist
-                </span>
-                <span th:if="${ethicStat.index + 1} &lt; ${empire.ethics.size()}">, </span>
-            </span>
-        </td>
-        <td th:text="${empire.authority}">
-            Oligarchic
-        </td>
-        <td th:text="${empire.government.name}">
-            Science Directorate
-        </td>
-        <td>
-            <span th:each="civic : ${empire.civics}">
-                <span th:text="${civic.name}">
-                    Technocracy, Inward Perfection
-                </span>
-                <span th:if="${civicStat.index + 1} &lt; ${empire.civics.size()}">, </span>
-            </span>
-        </td>
-        <td>
-            <button th:onclick="'confirmDelete(' + ${empire.id} + ');'" type="button">Delete</button>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<h2>Navigation</h2>
-<a href="/create-empire">Create Custom Empire</a>
+<body class="main-body">
+<div class="container">
+    <h1>Empire Table</h1>
+    <table class="empire-table">
+        <thead>
+        <tr class="empire-table-header">
+            <th>Empire Name</th>
+            <th>Government</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="empire : ${empires}">
+            <td th:text="${empire.name}">Saathid Directorate</td>
+            <td th:text="${empire.government.name}">Science Directorate</td>
+            <td>
+                <button th:onclick="'location.href=\'/empire/delete/' + ${empire.id} + '\';'" type="button">Delete
+                </button>
+                <button th:onclick="'location.href=\'/empire/' + ${empire.id} + '\';'" type="button">View</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <h2>Navigation</h2>
+    <a class="nav-link" href="/create-empire">Create Custom Empire</a>
+</div>
 <script src="/js/empireTable.js"></script>
 </body>
 </html>

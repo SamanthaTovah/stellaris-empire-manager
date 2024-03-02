@@ -3,90 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <title>Create New Empire</title>
+    <link href="/css/style.css" rel="stylesheet">
 </head>
-<body>
-<h1>Create New Empire</h1>
-<form action="#" method="post" th:action="@{/create-empire}" th:object="${empire}">
-    <label for="name">Empire Name:</label>
-    <input id="name" name="name" th:value="*{name}" type="text"/>
+<body class="main-body">
+<div class="container">
+    <h1>Create New Empire</h1>
+    <form action="#" class="empire-form" method="post" th:action="@{/create-empire}" th:object="${empire}">
 
-    <!-- Species Information -->
-    <label for="speciesName">Species Name:</label>
-    <input id="speciesName" name="species.name" th:value="*{species.name}" type="text"/>
+        <label for="name">Empire Name:</label>
+        <input id="name" name="name" th:value="*{name}" type="text"/>
 
-    <label for="appearance">Appearance:</label>
-    <select id="appearance" name="species.appearance.id">
-        <option th:each="appearance : ${appearances}"
-                th:text="${appearance.name}"
-                th:value="${appearance.id}">Appearance
-        </option>
-    </select>
+        <!-- Species Information -->
+        <label for="speciesName">Species Name:</label>
+        <input id="speciesName" name="species.name" th:value="*{species.name}" type="text"/>
 
-    <label for="traits">Traits:</label>
-    <select id="traits" multiple="multiple" name="species.traits">
-        <option th:each="trait : ${traits}"
-                th:text="${trait.name}"
-                th:value="${trait.id}">Trait
-        </option>
-    </select>
+        <label for="appearance">Appearance:</label>
+        <select id="appearance" name="species.appearance.id">
+            <option th:each="appearance : ${appearances}"
+                    th:text="${appearance.name}"
+                    th:value="${appearance.id}">Appearance
+            </option>
+        </select>
 
-    <!-- Homeworld Information -->
-    <label for="homeworldName">Homeworld Name:</label>
-    <input id="homeworldName" name="homeworld.homeworldName" th:value="*{homeworld.homeworldName}" type="text"/>
+        <label for="traits">Traits:</label>
+        <select id="traits" multiple="multiple" name="species.traits">
+            <option th:each="trait : ${traits}"
+                    th:text="${trait.name}"
+                    th:value="${trait.id}">Trait
+            </option>
+        </select>
 
-    <label for="starName">Star Name:</label>
-    <input id="starName" name="homeworld.starName" th:value="*{homeworld.starName}" type="text"/>
+        <!-- Homeworld Information -->
+        <label for="homeworldName">Homeworld Name:</label>
+        <input id="homeworldName" name="homeworld.homeworldName" th:value="*{homeworld.homeworldName}" type="text"/>
 
-    <label for="planetClass">Planet Class:</label>
-    <select id="planetClass" name="homeworld.planetClass.id">
-        <option th:each="planetClass : ${planetClasses}"
-                th:text="${planetClass.name}"
-                th:value="${planetClass.id}">Planet Class
-        </option>
-    </select>
+        <label for="starName">Star Name:</label>
+        <input id="starName" name="homeworld.starName" th:value="*{homeworld.starName}" type="text"/>
 
-    <label for="origin">Origin:</label>
-    <select id="origin" name="homeworld.origin.id">
-        <option th:each="origin : ${origins}"
-                th:text="${origin.name}"
-                th:value="${origin.id}">Origin
-        </option>
-    </select>
+        <label for="planetClass">Planet Class:</label>
+        <select id="planetClass" name="homeworld.planetClass.id">
+            <option th:each="planetClass : ${planetClasses}"
+                    th:text="${planetClass.name}"
+                    th:value="${planetClass.id}">Planet Class
+            </option>
+        </select>
 
-    <!-- Government Information -->
-    <label for="ethics">Ethics:</label>
-    <select id="ethics" multiple="multiple" name="ethics">
-        <option th:each="ethic : ${ethics}"
-                th:text="${ethic}"
-                th:value="${ethic}">Ethic
-        </option>
-    </select>
+        <label for="origin">Origin:</label>
+        <select id="origin" name="homeworld.origin.id">
+            <option th:each="origin : ${origins}"
+                    th:text="${origin.name}"
+                    th:value="${origin.id}">Origin
+            </option>
+        </select>
 
-    <label for="authority">Authority:</label>
-    <select id="authority" name="authority">
-        <option th:each="authority : ${authorities}"
-                th:text="${authority}"
-                th:value="${authority}">Authority
-        </option>
-    </select>
+        <!-- Government Information -->
+        <label for="ethics">Ethics:</label>
+        <select id="ethics" multiple="multiple" name="ethics">
+            <option th:each="ethic : ${ethics}"
+                    th:text="${ethic}"
+                    th:value="${ethic}">Ethic
+            </option>
+        </select>
 
-    <label for="government">Government:</label>
-    <select id="government" name="government.id">
-        <option th:each="government : ${governments}"
-                th:text="${government.name}"
-                th:value="${government.id}">Government
-        </option>
-    </select>
+        <label for="authority">Authority:</label>
+        <select id="authority" name="authority">
+            <option th:each="authority : ${authorities}"
+                    th:text="${authority}"
+                    th:value="${authority}">Authority
+            </option>
+        </select>
 
-    <label for="civics">Civics:</label>
-    <select id="civics" multiple="multiple" name="civics">
-        <option th:each="civic : ${civics}"
-                th:text="${civic.name}"
-                th:value="${civic.id}">Civic
-        </option>
-    </select>
+        <label for="government">Government:</label>
+        <select id="government" name="government.id">
+            <option th:each="government : ${governments}"
+                    th:text="${government.name}"
+                    th:value="${government.id}">Government
+            </option>
+        </select>
 
-    <button type="submit">Submit</button>
-</form>
+        <label for="civics">Civics:</label>
+        <select id="civics" multiple="multiple" name="civics">
+            <option th:each="civic : ${civics}"
+                    th:text="${civic.name}"
+                    th:value="${civic.id}">Civic
+            </option>
+        </select>
+        <button class="submit-btn" type="submit">Submit</button>
+    </form>
+</div>
 </body>
 </html>
