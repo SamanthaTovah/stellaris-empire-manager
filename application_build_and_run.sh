@@ -10,4 +10,5 @@ docker ps -a --filter ancestor=stellaris-empire-manager --format {{.Names}} | xa
 docker build -t stellaris-empire-manager .
 
 # Run the Docker container
-docker run -d --network stellaris-network -p 8080:8080 stellaris-empire-manager:latest
+docker run -d --network stellaris-network -p 8080:8080 -e SPRING_PROFILES_ACTIVE=docker \
+  stellaris-empire-manager:latest
