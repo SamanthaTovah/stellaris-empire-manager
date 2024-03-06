@@ -11,6 +11,7 @@ import org.springframework.validation.Errors;
 
 import java.util.Set;
 
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.never;
@@ -50,6 +51,8 @@ class EmpireValidatorTest {
     void validateWithValidEmpire() {
         validator.validate(empire, errors);
         verify(errors, never()).rejectValue(anyString(), anyString(), anyString());
+        // ci test
+        fail();
     }
 
     @Test
