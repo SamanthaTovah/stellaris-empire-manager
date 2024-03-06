@@ -52,7 +52,7 @@ class EmpireValidatorTest {
         validator.validate(empire, errors);
         verify(errors, never()).rejectValue(anyString(), anyString(), anyString());
         // ci test
-        fail();
+        fai
     }
 
     @Test
