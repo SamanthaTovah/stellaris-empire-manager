@@ -48,7 +48,7 @@ public class EmpireValidator implements Validator {
             errors.rejectValue("homeworld.origin", "origin.empty", "The origin cannot be empty.");
         }
 
-        if (empire.getEthics() == null) {
+        if (empire.getEthics() == null || empire.getEthics().isEmpty()) {
             errors.rejectValue("ethics", "ethics.empty", "The ethics cannot be empty.");
         } else if (!validateEthicsPoints(empire.getEthics())) {
             errors.rejectValue("ethics", "ethics.invalid_sum", "The total amount of ethics points must be 3.");
