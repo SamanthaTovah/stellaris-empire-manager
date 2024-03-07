@@ -1,7 +1,12 @@
 # stellaris-empire-manager
 
-**Stellaris Empire Manager** is a Spring Boot application connected to a database to store custom empires created in
-Stellaris.
+**Stellaris Empire Manager** is a simple web application I created to help me organize and manage my custom Stellaris
+game empires. It's built using Spring Boot for straightforward backend development and Docker to keep my deployment
+environment consistent.
+
+For keeping things secure, I've integrated Spring Security. The app's data is stored in a MySQL database hosted on
+Amazon RDS, aiming for persistence and ease of access. AWS Elastic Container Registry (ECR) is where the Docker images
+are stored, and the application runs on AWS Elastic Container Service (ECS) with Fargate.
 
 ## Setup
 
@@ -14,15 +19,16 @@ values in application-aws.properties, .github/workflows/build-and-push-image-to-
 values may later be
 changed to environmental variables to keep this project AWS-account agnostic.
 
-Local development is not associated to AWS/ECR in any way.
+Local development is not associated to AWS/ECS in any way.
 
-#### ECR Setup
+#### ECC/ECR Setup
 
-The ECR setup is a fairly basic Fargate setup with an associated RDS MySQL database.
+The ECS setup is a fairly basic Fargate setup with an associated RDS MySQL database and an ECR repository for the Spring
+Boot application image.
 
 #### Local image building
 
-To locally create containers to be pushed to the registry to be used by ECR, you need to run the following commands to
+To locally create containers to be pushed to the registry to be used by ECS, you need to run the following commands to
 support the multi architecture Docker build:
 
     # Enable

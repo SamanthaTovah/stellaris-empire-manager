@@ -8,10 +8,12 @@
 <body class="main-body">
 <div class="container">
     <h1>Welcome to Stellaris Empire Manager</h1>
-    <p>The Stellaris Empire Manager is a web application designed for the organization and management of custom
-        Stellaris game empires. It utilizes Docker for consistent deployment environments and Spring Boot for
-        streamlined application development. Security is managed through Spring Security, ensuring protected access,
-        while the integration with a MySQL database allows for persistent data management.</p>
+    <p>Stellaris Empire Manager is a simple web application I created to help me organize and manage my custom Stellaris
+        game empires. It's built using Spring Boot for straightforward backend development and Docker to keep my
+        deployment environment consistent.</p>
+    <p>For keeping things secure, I've integrated Spring Security. The app's data is stored in a MySQL database hosted
+        on Amazon RDS, aiming for persistence and ease of access. AWS Elastic Container Registry (ECR) is where the
+        Docker images are stored, and the application runs on AWS Elastic Container Service (ECS) with Fargate.</p>
     <h2>Navigation</h2>
     <a class="nav-link" href="/empires">View Empires</a>
     <br>
