@@ -15,7 +15,7 @@ are stored, and the application runs on AWS Elastic Container Service (ECS) with
 This repository is set up to be linked to my personal AWS account and the various services available therein. To use
 this
 in a similar manner you will need to set up a similar environment in AWS as well as change various hardcoded AWS related
-values in application-aws.properties, .github/workflows/build-and-push-image-to-ecr.yml, and perhaps other files. These
+values in application-aws.properties, redeploy-ecs-application.yml, and perhaps other files. These
 values may later be
 changed to environmental variables to keep this project AWS-account agnostic.
 
