@@ -90,3 +90,9 @@ h1, h2 {
 .action-buttons button:hover, .action-buttons .nav-link:hover {
     background-color: #0056b3;
 }
+
+.version-info {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+}
