@@ -21,7 +21,7 @@ h1, h2 {
 .nav-link {
     display: inline-block;
     background-color: #afd3db;
-    color: #ffffff;
+    color: black;
     padding: 10px 15px;
     margin: 5px;
     text-decoration: none;
@@ -59,7 +59,6 @@ h1, h2 {
 
 .submit-btn {
     background-color: #afd3db;
-    color: #ffffff;
     padding: 10px 15px;
     border: none;
     cursor: pointer;
