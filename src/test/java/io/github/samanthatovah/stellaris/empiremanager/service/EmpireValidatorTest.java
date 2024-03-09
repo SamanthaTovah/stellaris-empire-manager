@@ -74,13 +74,6 @@ class EmpireValidatorTest {
     }
 
     @Test
-    void validateWithEmptyStarName() {
-        empire.getHomeworld().setStarName("");
-        validator.validate(empire, errors);
-        verify(errors).rejectValue(eq("homeworld.starName"), eq("star_name.empty"), anyString());
-    }
-
-    @Test
     void validateWithEmptyHPlanetClass() {
         empire.getHomeworld().setPlanetClass(null);
         validator.validate(empire, errors);

@@ -17,7 +17,7 @@ public class Homeworld {
     @Column(name = "homeworld_name", nullable = false)
     private String homeworldName;
 
-    @Column(name = "star_name", nullable = false)
+    @Column(name = "star_name") // allowed to be null because not visible in Empire overview screen
     private String starName;
 
     @ManyToOne

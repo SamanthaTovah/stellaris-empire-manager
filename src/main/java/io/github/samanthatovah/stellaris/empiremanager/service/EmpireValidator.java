@@ -36,10 +36,6 @@ public class EmpireValidator implements Validator {
             errors.rejectValue("homeworld.homeworldName", "homeworld_name.empty", "The homeworld name cannot be empty.");
         }
 
-        if (empire.getHomeworld().getStarName() == null || empire.getHomeworld().getStarName().isEmpty()) {
-            errors.rejectValue("homeworld.starName", "star_name.empty", "The star name cannot be empty.");
-        }
-
         if (empire.getHomeworld().getPlanetClass() == null) {
             errors.rejectValue("homeworld.planetClass", "planet_class.empty", "The planet class cannot be empty.");
         }
