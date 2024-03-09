@@ -1095,5 +1095,14 @@
             <column name="name" value="Gaia World"/>
         </insert>
     </changeSet>
-    
+
+    <changeSet id="add_apocalypse_origins" author="Samantha Tovah">
+        <insert tableName="origin">
+            <column name="name" value="Life-Seeded"/>
+        </insert>
+        <insert tableName="origin">
+            <column name="name" value="Post-Apocalyptic"/>
+        </insert>
+    </changeSet>
+
 </databaseChangeLog>
