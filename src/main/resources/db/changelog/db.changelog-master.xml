@@ -1060,4 +1060,31 @@
         </insert>
     </changeSet>
 
+    <changeSet id="add_inherent_traits" author="Samantha Tovah">
+        <insert tableName="trait">
+            <column name="name" value="Hive-Minded"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Void Dweller"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Latent Psionic"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Machine"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Lithoid"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Survivor"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Necrophage"/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Cave Dweller"/>
+        </insert>
+    </changeSet>
+
 </databaseChangeLog>
