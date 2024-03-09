@@ -1110,4 +1110,10 @@
             <column name="name" value="Naval Contractors"/>
         </insert>
     </changeSet>
+
+    <changeSet id="add_organic_reprocessing_civic_machine_intelligence" author="Samantha Tovah">
+        <insert tableName="civic">
+            <column name="name" value="Organic Reprocessing (Machine Intelligence)"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>
