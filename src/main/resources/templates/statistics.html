@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Statistics</title>
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body class="main-body">
+<div class="container">
+    <h1>Appearance</h1>
+    <table class="empire-table display" id="appearanceStatsTable" style="width:100%">
+        <thead>
+        <tr class="empire-table-header">
+            <th>Appearance</th>
+            <th>Count</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="stat : ${appearanceStats}">
+            <td th:text="${stat.name}">Appearance</td>
+            <td th:text="${stat.count}">Count</td>
+        </tr>
+        </tbody>
+    </table>
+    <table class="empire-table display" id="traitStatsTable" style="width:100%">
+        <thead>
+        <tr class="empire-table-header">
+            <th>Trait</th>
+            <th>Count</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="stat : ${traitStats}">
+            <td th:text="${stat.name}">Trait</td>
+            <td th:text="${stat.count}">Count</td>
+        </tr>
+        </tbody>
+    </table>
+    <table class="empire-table display" id="planetClassStatsTable" style="width:100%">
+        <thead>
+        <tr class="empire-table-header">
+            <th>Planet Class</th>
+            <th>Count</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="stat : ${planetClassStats}">
+            <td th:text="${stat.name}">Trait</td>
+            <td th:text="${stat.count}">Count</td>
+        </tr>
+        </tbody>
+    </table>
+    <table class="empire-table display" id="originStatsTable" style="width:100%">
+        <thead>
+        <tr class="empire-table-header">
+            <th>Origin</th>
+            <th>Count</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="stat : ${originStats}">
+            <td th:text="${stat.name}">Origin</td>
+            <td th:text="${stat.count}">Count</td>
+        </tr>
+        </tbody>
+    </table>
+    <table class="empire-table display" id="ethicStatsTable" style="width:100%">
+        <thead>
+        <tr class="empire-table-header">
+            <th>Ethic</th>
+            <th>Count (weighted)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="stat : ${ethicStats}">
+            <td th:text="${stat.name}">Origin</td>
+            <td th:text="${stat.count}">Count</td>
+        </tr>
+        </tbody>
+    </table>
+    <table class="empire-table display" id="authorityStatsTable" style="width:100%">
+        <thead>
+        <tr class="empire-table-header">
+            <th>Authority</th>
+            <th>Count</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="stat : ${authorityStats}">
+            <td th:text="${stat.name}">Origin</td>
+            <td th:text="${stat.count}">Count</td>
+        </tr>
+        </tbody>
+    </table>
+    <table class="empire-table display" id="governmentStatsTable" style="width:100%">
+        <thead>
+        <tr class="empire-table-header">
+            <th>Government</th>
+            <th>Count</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="stat : ${governmentStats}">
+            <td th:text="${stat.name}">Government</td>
+            <td th:text="${stat.count}">Count</td>
+        </tr>
+        </tbody>
+    </table>
+    <table class="empire-table display" id="civicStatsTable" style="width:100%">
+        <thead>
+        <tr class="empire-table-header">
+            <th>Civic</th>
+            <th>Count</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="stat : ${civicStats}">
+            <td th:text="${stat.name}">Civic</td>
+            <td th:text="${stat.count}">Count</td>
+        </tr>
+        </tbody>
+    </table>
+    <h2>Navigation</h2>
+    <a class="nav-link" href="/">Index Page</a>
+    <br>
+    <a class="nav-link" href="/empires">View Empires</a>
+    <br>
+    <a class="nav-link" href="/create-empire">Create Empire</a>
+</div>
+</body>
+</html>

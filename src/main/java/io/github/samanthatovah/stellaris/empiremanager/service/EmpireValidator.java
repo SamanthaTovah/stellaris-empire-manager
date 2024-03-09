@@ -62,7 +62,7 @@ public class EmpireValidator implements Validator {
     private boolean validateEthicsPoints(Set<Ethic> ethics) {
         int sum = 0;
         for (Ethic ethic : ethics) {
-            sum += ethic.points;
+            sum += ethic.getPoints();
         }
         return sum == 3;
     }

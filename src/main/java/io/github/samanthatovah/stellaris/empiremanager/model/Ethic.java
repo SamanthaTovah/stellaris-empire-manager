@@ -1,5 +1,8 @@
 package io.github.samanthatovah.stellaris.empiremanager.model;
 
+import lombok.Getter;
+
+@Getter
 public enum Ethic {
     FANATIC_MILITARIST(2),
     MILITARIST(1),
@@ -20,9 +23,18 @@ public enum Ethic {
     FANATIC_SPIRITUALIST(2),
     ;
 
-    public final int points;
+    private final int points;
 
     Ethic(int points) {
         this.points = points;
     }
+
+    public String getBase() {
+        if (name().contains("FANATIC")) {
+            return name().split("FANATIC_")[1];
+        } else {
+            return name();
+        }
+    }
+
 }
