@@ -44,6 +44,11 @@ class EmpireValidatorTest {
         empire.getHomeworld().getOrigin().setName("Shattered Ring");
         empire.setEthics(Set.of(Ethic.XENOPHOBE, Ethic.MATERIALIST, Ethic.PACIFIST));
         empire.setAuthority(Authority.OLIGARCHIC);
+        Civic technocracy = new Civic();
+        technocracy.setName("Technocracy");
+        Civic inwardPerfection = new Civic();
+        inwardPerfection.setName("Inward Perfection");
+        empire.setCivics(Set.of(technocracy, inwardPerfection));
     }
 
     @Test
@@ -114,6 +119,13 @@ class EmpireValidatorTest {
         empire.setAuthority(null);
         validator.validate(empire, errors);
         verify(errors).rejectValue(eq("authority"), eq("authority.empty"), anyString());
+    }
+
+    @Test
+    void validateWithInvalidCivicAmount() {
+        empire.setCivics(Set.of(new Civic()));
+        validator.validate(empire, errors);
+        verify(errors).rejectValue(eq("civics"), eq("civics.invalid_amount"), anyString());
     }
 
 }

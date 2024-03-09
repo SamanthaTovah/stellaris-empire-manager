@@ -53,6 +53,10 @@ public class EmpireValidator implements Validator {
         if (empire.getAuthority() == null) {
             errors.rejectValue("authority", "authority.empty", "The authority cannot be empty.");
         }
+
+        if (empire.getCivics() == null || empire.getCivics().size() != 2) {
+            errors.rejectValue("civics", "civics.invalid_amount", "An empire must have two civics.");
+        }
     }
 
     private boolean validateEthicsPoints(Set<Ethic> ethics) {
