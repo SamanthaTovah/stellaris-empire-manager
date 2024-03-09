@@ -5,3 +5,14 @@ function confirmDelete(empireId) {
         }).then(response => window.location.reload());
     }
 }
+
+$(document).ready(function() {
+    $('.empire-table').DataTable({
+        "order": [],
+        "pageLength": 100,
+        "columnDefs": [{
+            "targets": 2,
+            "orderable": false, // This makes the Actions column not sortable
+        }]
+    });
+});
