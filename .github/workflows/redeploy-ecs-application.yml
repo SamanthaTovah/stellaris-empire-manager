@@ -51,7 +51,11 @@ jobs:
         id: task-def-update
         run: |
           TASK_DEF=$(cat .aws/ecs-task-definition.json)
-          NEW_TASK_DEF=$(echo $TASK_DEF | jq --compact-output --arg IMAGE_URI "${{ secrets.ECR_URI }}:${{ github.sha }}" '.containerDefinitions[0].image = $IMAGE_URI')
+          NEW_TASK_DEF=$(echo $TASK_DEF | jq --compact-output \
+            --arg SPRING_SECURITY_USER_NAME "${{ secrets.SPRING_SECURITY_USER_NAME }}" \
+            --arg SPRING_SECURITY_USER_PASSWORD "${{ secrets.SPRING_SECURITY_USER_PASSWORD }}" \
+            --arg IMAGE_URI "${{ secrets.ECR_URI }}:${{ github.sha }}" \
+            '.containerDefinitions[0].environment += [{"name":"SPRING_SECURITY_USER_NAME","value":$SPRING_SECURITY_USER_NAME}, {"name":"SPRING_SECURITY_USER_PASSWORD","value":$SPRING_SECURITY_USER_PASSWORD}] | .containerDefinitions[0].image = $IMAGE_URI')
           NEW_TASK_DEF_ARN=$(aws ecs register-task-definition --cli-input-json "$NEW_TASK_DEF" --query "taskDefinition.taskDefinitionArn" --output text)
           echo "::set-output name=new_task_def_arn::$NEW_TASK_DEF_ARN"
           aws ecs register-task-definition --cli-input-json "$NEW_TASK_DEF"
