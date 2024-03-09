@@ -21,8 +21,7 @@
             <td th:text="${empire.name}">Saathid Directorate</td>
             <td th:text="${empire.government.name}">Science Directorate</td>
             <td>
-                <button th:onclick="'location.href=\'/empire/delete/' + ${empire.id} + '\';'" type="button">Delete
-                </button>
+                <button th:onclick="'confirmDelete(' + ${empire.id} + ');'" type="button">Delete</button>
                 <button th:onclick="'location.href=\'/empire/' + ${empire.id} + '\';'" type="button">View</button>
             </td>
         </tr>
