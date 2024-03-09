@@ -1105,4 +1105,9 @@
         </insert>
     </changeSet>
 
+    <changeSet id="add_naval_contractors_civic" author="Samantha Tovah">
+        <insert tableName="civic">
+            <column name="name" value="Naval Contractors"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>
