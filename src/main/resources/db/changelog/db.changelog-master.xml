@@ -1087,4 +1087,13 @@
         </insert>
     </changeSet>
 
+    <changeSet id="add_apocalypse_starting_worlds" author="Samantha Tovah">
+        <insert tableName="planet_class">
+            <column name="name" value="Tomb World"/>
+        </insert>
+        <insert tableName="planet_class">
+            <column name="name" value="Gaia World"/>
+        </insert>
+    </changeSet>
+    
 </databaseChangeLog>
