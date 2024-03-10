@@ -38,9 +38,6 @@
         <label for="homeworldName">Homeworld Name:</label>
         <input id="homeworldName" name="homeworld.homeworldName" th:value="*{homeworld.homeworldName}" type="text"/>
 
-        <label for="starName">Star Name:</label>
-        <input id="starName" name="homeworld.starName" th:value="*{homeworld.starName}" type="text"/>
-
         <label for="planetClass">Planet Class:</label>
         <select id="planetClass" name="homeworld.planetClass.id">
             <option th:each="planetClass : ${planetClasses}"
