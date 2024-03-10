@@ -88,7 +88,6 @@
                 <constraints nullable="false"/>
             </column>
             <column name="star_name" type="VARCHAR(255)">
-                <constraints nullable="false"/>
             </column>
             <column name="planet_class" type="BIGINT">
                 <constraints nullable="false" foreignKeyName="fk_homeworld_planet_class"
@@ -1115,5 +1114,11 @@
         <insert tableName="civic">
             <column name="name" value="Organic Reprocessing (Machine Intelligence)"/>
         </insert>
+    </changeSet>
+
+    <changeSet id="remove_regular_organic_reprocessing_civic" author="Samantha Tovah">
+        <delete tableName="civic">
+            <where>name = 'Organic Reprocessing'</where>
+        </delete>
     </changeSet>
 </databaseChangeLog>
