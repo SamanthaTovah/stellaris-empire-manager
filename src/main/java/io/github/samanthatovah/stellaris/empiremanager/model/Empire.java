@@ -49,4 +49,10 @@ public class Empire {
     @ManyToOne
     @JoinColumn(name = "government", nullable = false)
     private Government government;
+
+    @Column(nullable = false)
+    private Integer elo;
+
+    @Column(name = "elo_comparisons", nullable = false)
+    private Integer eloComparisons;
 }

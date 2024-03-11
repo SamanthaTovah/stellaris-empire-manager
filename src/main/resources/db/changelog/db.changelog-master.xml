@@ -1121,4 +1121,36 @@
             <where>name = 'Organic Reprocessing'</where>
         </delete>
     </changeSet>
+
+    <changeSet id="add_elo_columns" author="Samantha Tovah">
+        <addColumn tableName="empire">
+            <column name="elo" type="int" defaultValueNumeric="1000">
+                <constraints nullable="false"/>
+            </column>
+            <column name="elo_comparisons" type="int" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="reset_elo" author="Samantha Tovah">
+        <update tableName="empire">
+            <column name="elo" value="1000"/>
+        </update>
+    </changeSet>
+
+    <changeSet id="reset_elo_fully" author="Samantha Tovah">
+        <update tableName="empire">
+            <column name="elo" value="1000"/>
+            <column name="elo_comparisons" value="0"/>
+        </update>
+    </changeSet>
+
+    <changeSet id="reset_elo_fully_again" author="Samantha Tovah">
+        <update tableName="empire">
+            <column name="elo" value="1000"/>
+            <column name="elo_comparisons" value="0"/>
+        </update>
+    </changeSet>
+
 </databaseChangeLog>

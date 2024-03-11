@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,6 +47,7 @@ public class EmpireController {
     @GetMapping("/empires")
     public String showEmpireTable(Model model) {
         List<Empire> empires = empireRepository.findAll();
+        empires.sort(Comparator.comparing(Empire::getElo));
         model.addAttribute("empires", empires);
         return "empire-table";
     }

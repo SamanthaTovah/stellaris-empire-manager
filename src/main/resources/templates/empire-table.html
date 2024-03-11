@@ -17,6 +17,7 @@
         <tr class="empire-table-header">
             <th>Empire Name</th>
             <th>Government</th>
+            <th>Elo</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -24,6 +25,7 @@
         <tr th:each="empire : ${empires}">
             <td th:text="${empire.name}">Saathid Directorate</td>
             <td th:text="${empire.government.name}">Science Directorate</td>
+            <td th:text="${empire.elo}"></td>
             <td>
                 <button th:onclick="'confirmDelete(' + ${empire.id} + ');'" type="button">Delete</button>
                 <button th:onclick="'location.href=\'/empire/' + ${empire.id} + '\';'" type="button">View</button>
@@ -37,6 +39,8 @@
     <a class="nav-link" href="/create-empire">Create Empire</a>
     <br>
     <a class="nav-link" href="/statistics">Empire Stats</a>
+    <br>
+    <a class="nav-link" href="/elo">Elo Rating</a>
 </div>
 </body>
 </html>

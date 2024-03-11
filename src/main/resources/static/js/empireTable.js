@@ -8,10 +8,10 @@ function confirmDelete(empireId) {
 
 $(document).ready(function() {
     $('.empire-table').DataTable({
-        "order": [],
+        "order": [[2, "desc"]],
         "pageLength": 100,
         "columnDefs": [{
-            "targets": 2,
+            "targets": 3,
             "orderable": false, // This makes the Actions column not sortable
         }]
     });
