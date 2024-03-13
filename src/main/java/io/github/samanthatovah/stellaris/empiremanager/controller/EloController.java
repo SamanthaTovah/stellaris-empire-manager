@@ -3,6 +3,7 @@ package io.github.samanthatovah.stellaris.empiremanager.controller;
 import io.github.samanthatovah.stellaris.empiremanager.model.Empire;
 import io.github.samanthatovah.stellaris.empiremanager.repository.EmpireRepository;
 import io.github.samanthatovah.stellaris.empiremanager.service.EloService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,12 +14,13 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
+@Log4j2
 @Controller
 public class EloController {
 
     private final EloService eloService;
     private final EmpireRepository empireRepository;
-    private final Comparator<Empire> eloThenRandomComparator = new Comparator<>() {
+    private final Comparator<Empire> eloComparator = new Comparator<>() {
         private final long seed = new Random().nextLong();
 
         @Override
@@ -44,7 +46,7 @@ public class EloController {
     @GetMapping("/elo")
     public String showEmpires(Model model) {
         List<Empire> empires = empireRepository.findAll();
-        empires.sort(eloThenRandomComparator);
+        empires.sort(eloComparator);
         Empire empire1 = empires.get(0);
         Empire empire2 = empires.get(1);
         model.addAttribute("empires", List.of(empire1, empire2));

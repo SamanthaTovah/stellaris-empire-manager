@@ -51,8 +51,8 @@ public class Empire {
     private Government government;
 
     @Column(nullable = false)
-    private Integer elo;
+    private Integer elo = 1000;
 
     @Column(name = "elo_comparisons", nullable = false)
-    private Integer eloComparisons;
+    private Integer eloComparisons = 0;
 }
