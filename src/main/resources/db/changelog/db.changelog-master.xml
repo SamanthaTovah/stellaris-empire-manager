@@ -1153,4 +1153,10 @@
         </update>
     </changeSet>
 
+    <changeSet id="add_pooled_knowledge_civic" author="Samantha Tovah">
+        <insert tableName="civic">
+            <column name="name" value="Pooled Knowledge"/>
+        </insert>
+    </changeSet>
+
 </databaseChangeLog>
