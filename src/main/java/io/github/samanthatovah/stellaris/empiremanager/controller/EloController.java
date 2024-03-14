@@ -38,7 +38,7 @@ public class EloController {
         empires.sort(new EloComparator(previousWinnersId));
         Empire empire1 = empires.get(0);
         Empire empire2 = empires.get(1);
-        for (int i = 0; i < 5 || i < empires.size(); i++) {
+        for (int i = 0; i < 5 && i < empires.size(); i++) {
             Empire empire = empires.get(i);
             log.debug("{}:\t{}\t{}", empire.getEloComparisons(), empire.getElo(), empire.getName());
         }

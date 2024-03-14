@@ -19,8 +19,8 @@ public class RequestResponseLoggingFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        log.info("Incoming request {} : {}", request.getMethod(), request.getRequestURI());
+        log.trace("Incoming request {} : {}", request.getMethod(), request.getRequestURI());
         filterChain.doFilter(request, response);
-        log.info("Outgoing response : {}", response.getStatus());
+        log.trace("Outgoing response : {}", response.getStatus());
     }
 }
