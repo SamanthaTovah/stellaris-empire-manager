@@ -1,21 +1,7 @@
-# stellaris-empire-manager
+# Stellaris Empire Manager
 
 **Stellaris Empire Manager** is a simple web application I created to help me organize and manage my custom Stellaris
 game empires.
-
-## Setup
-
-#### Local image building
-
-To locally create containers to be pushed to the registry to be used by services like ECS, you need to run the following
-commands to support the multi architecture Docker build:
-
-    # Enable
-    docker buildx create --name mymultiarchbuilder --use
-    # Turn on
-    docker buildx inspect --bootstrap
-    # Verify
-    docker buildx inspect mymultiarchbuilder --bootstrap
 
 ## Spring profiles
 
