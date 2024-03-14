@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayDeque;
 import java.util.List;
 import java.util.Objects;
+import java.util.Queue;
 
 @Log4j2
 @Controller
@@ -21,9 +23,9 @@ public class EloController {
 
     private final EloService eloService;
     private final EmpireRepository empireRepository;
+    private final Queue<Long> previousWinnersId = new ArrayDeque<>();
     private Long pickedEloEmpireId1 = null;
     private Long pickedEloEmpireId2 = null;
-    private Long previousWinnerId = null;
 
     public EloController(EloService eloService, EmpireRepository empireRepository) {
         this.eloService = eloService;
@@ -33,7 +35,7 @@ public class EloController {
     @GetMapping("/elo")
     public String showEmpires(Model model) {
         List<Empire> empires = empireRepository.findAll();
-        empires.sort(new EloComparator(previousWinnerId));
+        empires.sort(new EloComparator(previousWinnersId));
         Empire empire1 = empires.get(0);
         Empire empire2 = empires.get(1);
         for (int i = 0; i < 5 || i < empires.size(); i++) {
@@ -60,7 +62,14 @@ public class EloController {
             throw new FetchNotFoundException("Unknown", winnerId);
         }
         eloService.updateElo(winnerId, loserId);
-        previousWinnerId = winnerId;
+        if (previousWinnersId.size() >= 5) {
+            previousWinnersId.remove();
+        }
+        previousWinnersId.add(winnerId);
+        log.info("Previous winners not eligible for picking: {}",
+                previousWinnersId.stream()
+                        .map(id -> empireRepository.findById(id).orElseThrow().getName())
+                        .toList());
         return "redirect:/elo";
     }
 }

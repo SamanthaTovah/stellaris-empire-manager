@@ -1159,4 +1159,10 @@
         </insert>
     </changeSet>
 
+    <changeSet id="add_barbaric_despoilers_civic" author="Samantha Tovah">
+        <insert tableName="civic">
+            <column name="name" value="Barbaric Despoilers"/>
+        </insert>
+    </changeSet>
+
 </databaseChangeLog>

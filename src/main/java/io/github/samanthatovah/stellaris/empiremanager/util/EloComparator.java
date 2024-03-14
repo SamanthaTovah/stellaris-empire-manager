@@ -3,26 +3,29 @@ package io.github.samanthatovah.stellaris.empiremanager.util;
 import io.github.samanthatovah.stellaris.empiremanager.model.Empire;
 
 import java.util.Comparator;
+import java.util.Queue;
 import java.util.Random;
+import java.util.Set;
 
 public class EloComparator implements Comparator<Empire> {
 
     private final long seed = new Random().nextLong();
-    private final Long previousWinnerId;
+    private final Queue<Long> previousWinnersId;
 
-    public EloComparator(Long previousWinnerId) {
-        this.previousWinnerId = previousWinnerId;
+    public EloComparator(Queue<Long> previousWinnersId) {
+        this.previousWinnersId = previousWinnersId;
     }
 
     @Override
     public int compare(Empire e1, Empire e2) {
         // Prevent picking the previous winner
-        if (previousWinnerId != null) {
-            if (e1.getId().equals(previousWinnerId)) {
-                return 1;
-            } else if (e2.getId().equals(previousWinnerId)) {
-                return -1;
-            }
+        if (previousWinnersId.containsAll(Set.of(e1.getId(), e2.getId()))) {
+            return 0;
+        }
+        if (previousWinnersId.contains(e1.getId())) {
+            return 1;
+        } else if (previousWinnersId.contains(e2.getId())) {
+            return -1;
         }
 
         // Pick empires with the lowest amount of Elo comparisons first
