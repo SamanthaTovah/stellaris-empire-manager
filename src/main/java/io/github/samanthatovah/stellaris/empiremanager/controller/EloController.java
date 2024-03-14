@@ -3,16 +3,17 @@ package io.github.samanthatovah.stellaris.empiremanager.controller;
 import io.github.samanthatovah.stellaris.empiremanager.model.Empire;
 import io.github.samanthatovah.stellaris.empiremanager.repository.EmpireRepository;
 import io.github.samanthatovah.stellaris.empiremanager.service.EloService;
+import io.github.samanthatovah.stellaris.empiremanager.util.EloComparator;
 import lombok.extern.log4j.Log4j2;
+import org.hibernate.FetchNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Comparator;
 import java.util.List;
-import java.util.Random;
+import java.util.Objects;
 
 @Log4j2
 @Controller
@@ -20,23 +21,9 @@ public class EloController {
 
     private final EloService eloService;
     private final EmpireRepository empireRepository;
-    private final Comparator<Empire> eloComparator = new Comparator<>() {
-        private final long seed = new Random().nextLong();
-
-        @Override
-        public int compare(Empire e1, Empire e2) {
-            int result = e1.getEloComparisons().compareTo(e2.getEloComparisons());
-            if (result == 0) {
-                long e1Value = new Random(seed * e1.getId() * e1.getElo()).nextLong();
-                long e2Value = new Random(seed * e2.getId() * e2.getElo()).nextLong();
-                result = Long.compare(e1Value, e2Value);
-            }
-            return result;
-        }
-    };
-
-    private long e1;
-    private long e2;
+    private Long pickedEloEmpireId1 = null;
+    private Long pickedEloEmpireId2 = null;
+    private Long previousWinnerId = null;
 
     public EloController(EloService eloService, EmpireRepository empireRepository) {
         this.eloService = eloService;
@@ -46,26 +33,34 @@ public class EloController {
     @GetMapping("/elo")
     public String showEmpires(Model model) {
         List<Empire> empires = empireRepository.findAll();
-        empires.sort(eloComparator);
+        empires.sort(new EloComparator(previousWinnerId));
         Empire empire1 = empires.get(0);
         Empire empire2 = empires.get(1);
+        for (int i = 0; i < 5 || i < empires.size(); i++) {
+            Empire empire = empires.get(i);
+            log.debug("{}:\t{}\t{}", empire.getEloComparisons(), empire.getElo(), empire.getName());
+        }
+        log.debug("Matching {} ({} elo, {} comps) vs {} ({} elo, {} comps)",
+                empire1.getName(), empire1.getElo(), empire1.getEloComparisons(),
+                empire2.getName(), empire2.getElo(), empire2.getEloComparisons());
         model.addAttribute("empires", List.of(empire1, empire2));
-        this.e1 = empire1.getId();
-        this.e2 = empire2.getId();
+        this.pickedEloEmpireId1 = empire1.getId();
+        this.pickedEloEmpireId2 = empire2.getId();
         return "elo";
     }
 
     @PostMapping("/elo")
     public String processEloUpdate(@RequestParam("winnerId") Long winnerId) {
         long loserId;
-        if (winnerId == e1) {
-            loserId = e2;
-        } else if (winnerId == e2) {
-            loserId = e1;
+        if (Objects.equals(winnerId, pickedEloEmpireId1)) {
+            loserId = pickedEloEmpireId2;
+        } else if (Objects.equals(winnerId, pickedEloEmpireId2)) {
+            loserId = pickedEloEmpireId1;
         } else {
-            throw new RuntimeException();
+            throw new FetchNotFoundException("Unknown", winnerId);
         }
         eloService.updateElo(winnerId, loserId);
+        previousWinnerId = winnerId;
         return "redirect:/elo";
     }
 }
