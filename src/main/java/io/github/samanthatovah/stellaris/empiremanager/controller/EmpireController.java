@@ -3,6 +3,7 @@ package io.github.samanthatovah.stellaris.empiremanager.controller;
 import io.github.samanthatovah.stellaris.empiremanager.model.*;
 import io.github.samanthatovah.stellaris.empiremanager.repository.*;
 import io.github.samanthatovah.stellaris.empiremanager.service.EmpireValidator;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,9 +14,13 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
+@Log4j2
 @Controller
 public class EmpireController {
 
+    private static final String EMPIRE = "empire";
+    private static final String TITLE = "title";
+    private static final String EMPIRE_FORM = "empire-form";
     private final EmpireRepository empireRepository;
     private final OriginRepository originRepository;
     private final AppearanceRepository appearanceRepository;
@@ -55,7 +60,7 @@ public class EmpireController {
     @GetMapping("/empire/{id}")
     public String showEmpireDetails(@PathVariable("id") Long id, Model model) {
         Optional<Empire> empire = empireRepository.findById(id);
-        model.addAttribute("empire", empire.orElseThrow());
+        model.addAttribute(EMPIRE, empire.orElseThrow());
         return "empire-details";
     }
 
@@ -65,19 +70,44 @@ public class EmpireController {
         newEmpire.setHomeworld(new Homeworld());
         newEmpire.setSpecies(new Species());
 
-        model.addAttribute("empire", newEmpire);
+        model.addAttribute(EMPIRE, newEmpire);
+        model.addAttribute(TITLE, "Create New Empire");
         populateEmpireFormModel(model);
 
-        return "empire-form";
+        return EMPIRE_FORM;
     }
 
+    @GetMapping("/edit-empire/{id}")
+    public String showEditEmpireForm(@PathVariable("id") Long id, Model model) {
+        Empire empire = empireRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid empire Id:" + id));
+
+        model.addAttribute(EMPIRE, empire);
+        model.addAttribute(TITLE, "Edit " + empire.getName());
+        populateEmpireFormModel(model);
+
+        return EMPIRE_FORM;
+    }
+
+
     @PostMapping("/create-empire")
-    public String createEmpire(@ModelAttribute Empire empire, BindingResult result, Model model) {
+    public String createOrUpdateEmpire(@ModelAttribute Empire empire, BindingResult result, Model model) {
         empireValidator.validate(empire, result);
 
         if (result.hasErrors()) {
+            log.error(result.getAllErrors());
             populateEmpireFormModel(model);
-            return "empire-form";
+            return EMPIRE_FORM;
+        }
+
+        Long id = empire.getId();
+        if (id != null && empireRepository.existsById(id)) {
+            Empire oldEmpire = empireRepository.findById(id).orElseThrow();
+            log.info("Editing existing empire (id: {}, old name: {})",
+                    id, oldEmpire.getName());
+            empire.setElo(oldEmpire.getElo());
+            empire.setEloComparisons(oldEmpire.getEloComparisons());
+        } else {
+            log.info("Creating new empire (id: {}, name: {}", id, empire.getName());
         }
 
         speciesRepository.save(empire.getSpecies());

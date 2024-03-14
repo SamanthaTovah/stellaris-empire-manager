@@ -2,14 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Create New Empire</title>
+    <title th:text="${title}"></title>
     <link href="/css/style.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
 </head>
 <body class="main-body">
 <div class="container">
-    <h1>Create New Empire</h1>
+    <h1 th:text="${title}"></h1>
     <form action="#" class="empire-form" method="post" th:action="@{/create-empire}" th:object="${empire}">
+
+        <!-- Hidden field for ID -->
+        <input id="id" name="id" th:value="*{id}" type="hidden"/>
 
         <label for="name">Empire Name:</label>
         <input id="name" name="name" th:value="*{name}" type="text"/>
@@ -21,14 +24,17 @@
         <label for="appearance">Appearance:</label>
         <select id="appearance" name="species.appearance.id">
             <option th:each="appearance : ${appearances}"
+                    th:selected="${empire.species.appearance != null and empire.species.appearance.id.equals(appearance.id) ? 'selected' : null}"
                     th:text="${appearance.name}"
-                    th:value="${appearance.id}">Appearance
+                    th:value="${appearance.id}">
+                Appearance
             </option>
         </select>
 
         <label for="traits">Traits:</label>
         <select id="traits" multiple="multiple" name="species.traits">
             <option th:each="trait : ${traits}"
+                    th:selected="${empire.species.traits.contains(trait)}"
                     th:text="${trait.name}"
                     th:value="${trait.id}">Trait
             </option>
@@ -41,16 +47,20 @@
         <label for="planetClass">Planet Class:</label>
         <select id="planetClass" name="homeworld.planetClass.id">
             <option th:each="planetClass : ${planetClasses}"
+                    th:selected="${empire.homeworld.planetClass != null and empire.homeworld.planetClass.id.equals(planetClass.id) ? 'selected' : null}"
                     th:text="${planetClass.name}"
-                    th:value="${planetClass.id}">Planet Class
+                    th:value="${planetClass.id}">
+                Planet Class
             </option>
         </select>
 
         <label for="origin">Origin:</label>
         <select id="origin" name="homeworld.origin.id">
             <option th:each="origin : ${origins}"
+                    th:selected="${empire.homeworld.origin != null and empire.homeworld.origin.id.equals(origin.id) ? 'selected' : null}"
                     th:text="${origin.name}"
-                    th:value="${origin.id}">Origin
+                    th:value="${origin.id}">
+                Origin
             </option>
         </select>
 
@@ -58,30 +68,35 @@
         <label for="ethics">Ethics:</label>
         <select id="ethics" multiple="multiple" name="ethics">
             <option th:each="ethic : ${ethics}"
-                    th:text="${ethic}"
-                    th:value="${ethic}">Ethic
+                    th:selected="${empire.ethics.contains(ethic)}"
+                    th:text="${ethic}">Ethic
             </option>
         </select>
 
         <label for="authority">Authority:</label>
         <select id="authority" name="authority">
             <option th:each="authority : ${authorities}"
+                    th:selected="${empire.authority != null and empire.authority.equals(authority) ? 'selected' : null}"
                     th:text="${authority}"
-                    th:value="${authority}">Authority
+                    th:value="${authority}">
+                Authority
             </option>
         </select>
 
         <label for="government">Government:</label>
         <select id="government" name="government.id">
             <option th:each="government : ${governments}"
+                    th:selected="${empire.government != null and empire.government.id.equals(government.id) ? 'selected' : null}"
                     th:text="${government.name}"
-                    th:value="${government.id}">Government
+                    th:value="${government.id}">
+                Government
             </option>
         </select>
 
         <label for="civics">Civics:</label>
         <select id="civics" multiple="multiple" name="civics">
             <option th:each="civic : ${civics}"
+                    th:selected="${empire.civics.contains(civic)}"
                     th:text="${civic.name}"
                     th:value="${civic.id}">Civic
             </option>

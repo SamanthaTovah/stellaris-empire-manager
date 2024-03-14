@@ -20,11 +20,11 @@ public class Empire {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "species", nullable = false)
     private Species species;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "homeworld", nullable = false)
     private Homeworld homeworld;
 
@@ -38,7 +38,7 @@ public class Empire {
     @Column(nullable = false)
     private Authority authority;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "empire_civic",
             joinColumns = @JoinColumn(name = "empire_id"),
