@@ -1179,4 +1179,28 @@
         </addColumn>
     </changeSet>
 
+    <changeSet id="add_humanoid_dlc" author="Samantha Tovah">
+        <insert tableName="civic">
+            <column name="name" value="Pleasure Seekers"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Pompous Purists"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Masterful Crafters"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Corporate Hedonism"/>
+        </insert>
+        <insert tableName="civic">
+            <column name="name" value="Mastercraft Inc."/>
+        </insert>
+        <insert tableName="trait">
+            <column name="name" value="Clone Soldier"/>
+        </insert>
+        <insert tableName="origin">
+            <column name="name" value="Clone Army"/>
+        </insert>
+    </changeSet>
+
 </databaseChangeLog>
