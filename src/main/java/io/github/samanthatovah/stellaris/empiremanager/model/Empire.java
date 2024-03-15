@@ -13,6 +13,8 @@ import java.util.Set;
 @Table(name = "empire")
 public class Empire {
 
+    String winClass;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -55,4 +57,13 @@ public class Empire {
 
     @Column(name = "elo_comparisons", nullable = false)
     private Integer eloComparisons = 0;
+
+    @Column(name = "won_small_galaxy", nullable = false)
+    private Boolean wonSmallGalaxy = false;
+
+    @Column(name = "won_medium_galaxy", nullable = false)
+    private Boolean wonMediumGalaxy = false;
+
+    @Column(name = "won_large_galaxy", nullable = false)
+    private Boolean wonLargeGalaxy = false;
 }

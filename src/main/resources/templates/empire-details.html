@@ -56,6 +56,16 @@
                     th:if="${civicStat.index + 1} &lt; ${empire.civics.size()}">, </span>
             </span>
         </div>
+
+        <div class="detail-item empire-table-header"><strong>Small Galaxy Winner</strong></div>
+        <div class="detail-item"><span th:text="${empire.wonSmallGalaxy}">True of False here</span></div>
+
+        <div class="detail-item empire-table-header"><strong>Medium Galaxy Winner</strong></div>
+        <div class="detail-item"><span th:text="${empire.wonMediumGalaxy}">True of False here</span></div>
+
+        <div class="detail-item empire-table-header"><strong>Large Galaxy Winner</strong></div>
+        <div class="detail-item"><span th:text="${empire.wonLargeGalaxy}">True of False here</span></div>
+
     </div>
     <h2>Navigation</h2>
     <a class="nav-link" href="/">Index Page</a>

@@ -52,6 +52,17 @@ public class EmpireController {
     @GetMapping("/empires")
     public String showEmpireTable(Model model) {
         List<Empire> empires = empireRepository.findAll();
+        empires.forEach(empire -> {
+            if (Boolean.TRUE.equals(empire.getWonLargeGalaxy())) {
+                empire.setWinClass("win-large");
+            } else if (Boolean.TRUE.equals(empire.getWonMediumGalaxy())) {
+                empire.setWinClass("win-medium");
+            } else if (Boolean.TRUE.equals(empire.getWonSmallGalaxy())) {
+                empire.setWinClass("win-small");
+            } else {
+                empire.setWinClass("");
+            }
+        });
         empires.sort(Comparator.comparing(Empire::getElo));
         model.addAttribute("empires", empires);
         return "empire-table";

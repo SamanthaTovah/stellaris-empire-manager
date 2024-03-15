@@ -22,7 +22,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="empire : ${empires}">
+        <tr th:class="${empire.winClass}" th:each="empire : ${empires}">
             <td th:text="${empire.name}">Saathid Directorate</td>
             <td th:text="${empire.government.name}">Science Directorate</td>
             <td th:text="${empire.elo}"></td>

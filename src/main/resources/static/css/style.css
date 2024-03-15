@@ -94,3 +94,15 @@ h1, h2 {
     right: 10px;
     bottom: 10px;
 }
+
+.win-large {
+    background-color: gold !important;
+}
+
+.win-medium {
+    background-color: silver !important;
+}
+
+.win-small {
+    background-color: #cd7f32 !important; /* Bronze color */
+}

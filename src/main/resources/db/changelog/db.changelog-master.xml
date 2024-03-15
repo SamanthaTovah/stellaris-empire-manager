@@ -1165,4 +1165,18 @@
         </insert>
     </changeSet>
 
+    <changeSet id="add_victory_boolean_columns_to_empire" author="Samantha Tovah">
+        <addColumn tableName="empire">
+            <column name="won_small_galaxy" type="BOOLEAN" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="won_medium_galaxy" type="BOOLEAN" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="won_large_galaxy" type="BOOLEAN" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>

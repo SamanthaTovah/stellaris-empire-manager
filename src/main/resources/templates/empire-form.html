@@ -101,6 +101,21 @@
                     th:value="${civic.id}">Civic
             </option>
         </select>
+
+        <!-- Game Victory Information -->
+        <div class="form-group">
+            <label for="wonSmallGalaxy">Won Small Galaxy Game:</label>
+            <input id="wonSmallGalaxy" name="wonSmallGalaxy" th:checked="*{wonSmallGalaxy}" type="checkbox"/>
+        </div>
+        <div class="form-group">
+            <label for="wonMediumGalaxy">Won Medium Galaxy Game:</label>
+            <input id="wonMediumGalaxy" name="wonMediumGalaxy" th:checked="*{wonMediumGalaxy}" type="checkbox"/>
+        </div>
+        <div class="form-group">
+            <label for="wonLargeGalaxy">Won Large Galaxy Game:</label>
+            <input id="wonLargeGalaxy" name="wonLargeGalaxy" th:checked="*{wonLargeGalaxy}" type="checkbox"/>
+        </div>
+
         <button class="submit-btn" type="submit">Submit</button>
     </form>
     <h2>Navigation</h2>
