@@ -13,7 +13,7 @@ import java.util.Set;
 @Table(name = "empire")
 public class Empire {
 
-    String winClass;
+    transient String winClass;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
