@@ -5,9 +5,11 @@
         <div class="empire" th:attr="data-empire-id=${empire1.id}" th:id="'empire-' + ${empire1.id}">
             <h2 th:text="${empire1.name}"></h2>
             <span th:text="${empire1.government.name}"></span>
-            <ul>
-                <li th:each="civic : ${empire1.civics}" th:text="${civic.name}"></li>
-            </ul>
+            <div class="image-container">
+                <img alt="Empire Authority" class="authority-image"
+                     th:src="@{'/img/authority/' + ${empire1.authority} + '.png'}"/>
+            </div>
+            <div th:each="civic : ${empire1.civics}" th:text="${civic.name}"></div>
             <!-- Hidden Form to select Empire 1 as Winner -->
             <form method="post" th:action="@{/elo}" th:id="'form-empire-' + ${empire1.id}">
                 <input name="winnerId" th:value="${empire1.id}" type="hidden"/>
@@ -18,9 +20,11 @@
         <div class="empire" th:attr="data-empire-id=${empire2.id}" th:id="'empire-' + ${empire2.id}">
             <h2 th:text="${empire2.name}"></h2>
             <span th:text="${empire2.government.name}"></span>
-            <ul>
-                <li th:each="civic : ${empire2.civics}" th:text="${civic.name}"></li>
-            </ul>
+            <div class="image-container">
+                <img alt="Empire Authority" class="authority-image"
+                     th:src="@{'/img/authority/' + ${empire2.authority} + '.png'}"/>
+            </div>
+            <div th:each="civic : ${empire2.civics}" th:text="${civic.name}"></div>
             <!-- Hidden Form to select Empire 2 as Winner -->
             <form method="post" th:action="@{/elo}" th:id="'form-empire-' + ${empire2.id}">
                 <input name="winnerId" th:value="${empire2.id}" type="hidden"/>

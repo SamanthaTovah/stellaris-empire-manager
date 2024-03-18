@@ -148,4 +148,14 @@ h1, h2 {
     padding: 20px;
     width: 45%;
     cursor: pointer;
+    text-align:center;
+}
+
+.image-container {
+    padding: 5px 0;
+    text-align: center;
+}
+
+.authority-image {
+    padding: 5px;
 }

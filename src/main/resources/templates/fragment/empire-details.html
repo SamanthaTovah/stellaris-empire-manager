@@ -36,7 +36,10 @@
         </div>
 
         <div class="detail-item empire-table-header"><strong>Authority</strong></div>
-        <div class="detail-item"><span th:text="${empire.authority}">Authority Here</span></div>
+        <div class="image-container">
+            <img alt="Empire Authority" class="authority-image"
+                 th:src="@{'/img/authority/' + ${empire.authority} + '.png'}"/>
+        </div>
 
         <div class="detail-item empire-table-header"><strong>Government</strong></div>
         <div class="detail-item"><span th:text="${empire.government.name}">Government Type Here</span></div>

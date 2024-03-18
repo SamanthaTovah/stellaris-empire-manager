@@ -84,7 +84,9 @@
         </thead>
         <tbody>
         <tr th:each="stat : ${authorityStats}">
-            <td th:text="${stat.name}">Origin</td>
+            <td>
+                <img alt="Empire Authority" th:src="@{'/img/authority/' + ${stat.name} + '.png'}"/>
+            </td>
             <td th:text="${stat.count}">Count</td>
         </tr>
         </tbody>

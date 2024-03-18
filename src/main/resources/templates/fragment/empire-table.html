@@ -4,6 +4,7 @@
         <thead>
         <tr class="empire-table-header">
             <th>Empire Name</th>
+            <th>Auth.</th>
             <th>Government</th>
             <th>Elo</th>
             <th>Actions</th>
@@ -12,6 +13,9 @@
         <tbody>
         <tr th:class="${empire.winClass}" th:each="empire : ${empires}">
             <td th:text="${empire.name}">Saathid Directorate</td>
+            <td>
+                <img alt="Empire Authority" th:src="@{'/img/authority/' + ${empire.authority} + '.png'}"/>
+            </td>
             <td th:text="${empire.government.name}">Science Directorate</td>
             <td th:text="${empire.elo}"></td>
             <td>
