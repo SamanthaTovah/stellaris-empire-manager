@@ -42,13 +42,14 @@ public class EloController extends ApplicationController {
             Empire empire = empires.get(i);
             log.debug("{}:\t{}\t{}", empire.getEloComparisons(), empire.getElo(), empire.getName());
         }
-        log.debug("Matching {} ({} elo, {} comps) vs {} ({} elo, {} comps)",
+        log.info("Matching {} ({} elo, {} comps) vs {} ({} elo, {} comps)",
                 empire1.getName(), empire1.getElo(), empire1.getEloComparisons(),
                 empire2.getName(), empire2.getElo(), empire2.getEloComparisons());
         this.pickedEloEmpireId1 = empire1.getId();
         this.pickedEloEmpireId2 = empire2.getId();
 
-        model.addAttribute("empires", List.of(empire1, empire2));
+        model.addAttribute("empire1", empire1);
+        model.addAttribute("empire2", empire2);
         model.addAttribute(CONTENT, "fragment/elo");
         addGitInfo(model);
 

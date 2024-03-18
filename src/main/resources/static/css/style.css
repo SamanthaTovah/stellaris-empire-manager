@@ -132,3 +132,20 @@ h1, h2 {
 .navbar, #content {
     overflow-y: auto; /* Allow vertical scrolling within elements if needed */
 }
+
+.elo-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    align-items: stretch; /* This makes the child elements fill the container vertically */
+    width: 100%; /* This ensures the container takes up all available width */
+}
+
+.empire {
+    flex: 1;
+    margin: 10px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 45%;
+    cursor: pointer;
+}

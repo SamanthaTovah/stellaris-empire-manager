@@ -1,10 +1,39 @@
 <div xmlns:th="http://www.w3.org/1999/xhtml">
     <h1>Empire ELO Comparisons</h1>
-    <form method="post" th:action="@{/elo}">
-        <div th:each="empire : ${empires}">
-            <input th:name="winnerId" th:value="${empire.id}" type="radio"/>
-            <span th:text="${empire.name} + ' (' + ${empire.government.name} + ')'"></span>
+    <div class="elo-container">
+        <!-- Empire 1 -->
+        <div class="empire" th:attr="data-empire-id=${empire1.id}" th:id="'empire-' + ${empire1.id}">
+            <h2 th:text="${empire1.name}"></h2>
+            <span th:text="${empire1.government.name}"></span>
+            <ul>
+                <li th:each="civic : ${empire1.civics}" th:text="${civic.name}"></li>
+            </ul>
+            <!-- Hidden Form to select Empire 1 as Winner -->
+            <form method="post" th:action="@{/elo}" th:id="'form-empire-' + ${empire1.id}">
+                <input name="winnerId" th:value="${empire1.id}" type="hidden"/>
+            </form>
         </div>
-        <button type="submit">Select Winner</button>
-    </form>
+
+        <!-- Empire 2 -->
+        <div class="empire" th:attr="data-empire-id=${empire2.id}" th:id="'empire-' + ${empire2.id}">
+            <h2 th:text="${empire2.name}"></h2>
+            <span th:text="${empire2.government.name}"></span>
+            <ul>
+                <li th:each="civic : ${empire2.civics}" th:text="${civic.name}"></li>
+            </ul>
+            <!-- Hidden Form to select Empire 2 as Winner -->
+            <form method="post" th:action="@{/elo}" th:id="'form-empire-' + ${empire2.id}">
+                <input name="winnerId" th:value="${empire2.id}" type="hidden"/>
+            </form>
+        </div>
+    </div>
+    <script th:inline="none">
+        $(document).ready(function() {
+            $('.empire').click(function() {
+                var empireId = $(this).data('empire-id');
+                // Use the empireId to construct the form's ID dynamically and submit
+                $('#form-empire-' + empireId).submit();
+            });
+        });
+    </script>
 </div>
