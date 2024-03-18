@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title th:text="${title}"></title>
-    <link href="/css/style.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
-</head>
-<body class="main-body">
-<div class="container">
+<div xmlns:th="http://www.w3.org/1999/xhtml">
     <h1 th:text="${title}"></h1>
     <form action="#" class="empire-form" method="post" th:action="@{/create-empire}" th:object="${empire}">
 
@@ -118,16 +109,4 @@
 
         <button class="submit-btn" type="submit">Submit</button>
     </form>
-    <h2>Navigation</h2>
-    <a class="nav-link" href="/">Index Page</a>
-    <br>
-    <a class="nav-link" href="/empires">View Empires</a>
-    <br>
-    <a class="nav-link" href="/statistics">Empire Stats</a>
 </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-<script src="/js/empireForm.js"></script>
-</body>
-</html>

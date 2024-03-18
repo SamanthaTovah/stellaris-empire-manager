@@ -13,6 +13,7 @@ public class HealthController {
     public Map<String, String> healthCheck() {
         Map<String, String> healthStatus = new HashMap<>();
         healthStatus.put("status", "UP");
+
         return healthStatus;
     }
 }

@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Empire Details</title>
-    <link href="/css/style.css" rel="stylesheet">
-</head>
-<body class="main-body">
-<div class="container">
+<div xmlns:th="http://www.w3.org/1999/xhtml">
     <h1>Empire Details</h1>
     <div class="empire-table">
         <div class="detail-item empire-table-header"><strong>Empire Name</strong></div>
@@ -67,14 +59,4 @@
         <div class="detail-item"><span th:text="${empire.wonLargeGalaxy}">True of False here</span></div>
 
     </div>
-    <h2>Navigation</h2>
-    <a class="nav-link" href="/">Index Page</a>
-    <br>
-    <a class="nav-link" href="/empires">View Empires</a>
-    <br>
-    <a class="nav-link" href="/create-empire">Create Empire</a>
-    <br>
-    <a class="nav-link" href="/statistics">Empire Stats</a>
 </div>
-</body>
-</html>

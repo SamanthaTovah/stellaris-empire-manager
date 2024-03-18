@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>ELO Rating</title>
-    <link href="/css/style.css" rel="stylesheet">
-</head>
-<body>
-<div>
+<div xmlns:th="http://www.w3.org/1999/xhtml">
     <h1>Empire ELO Comparisons</h1>
     <form method="post" th:action="@{/elo}">
         <div th:each="empire : ${empires}">
@@ -16,9 +8,3 @@
         <button type="submit">Select Winner</button>
     </form>
 </div>
-<h2>Navigation</h2>
-<a class="nav-link" href="/">Index Page</a>
-<br>
-<a class="nav-link" href="/empires">View Empires</a>
-</body>
-</html>

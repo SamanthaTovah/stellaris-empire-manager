@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class StatisticsController {
+public class StatisticsController extends ApplicationController {
 
     private final AppearanceService appearanceService;
     private final TraitService traitService;
@@ -41,7 +41,10 @@ public class StatisticsController {
         model.addAttribute("authorityStats", authorityService.getCountStats());
         model.addAttribute("governmentStats", governmentService.getCountStats());
         model.addAttribute("civicStats", civicService.getCountStats());
-        return "statistics";
+        model.addAttribute(CONTENT, "fragment/statistics");
+        addGitInfo(model);
+
+        return MAIN_LAYOUT;
     }
 
 }

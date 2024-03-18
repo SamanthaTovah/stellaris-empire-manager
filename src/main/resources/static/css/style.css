@@ -106,3 +106,29 @@ h1, h2 {
 .win-small {
     background-color: #cd7f32 !important; /* Bronze color */
 }
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%; /* Ensure it doesn't exceed the viewport width */
+    height: 100vh; /* Adjust if necessary to fit the viewport height */
+    overflow-x: hidden; /* Hide horizontal overflow */
+}
+
+.navbar {
+    flex: 0 0 200px; /* Do not grow, do not shrink, start at 200px width */
+    /* Adjust the width as needed */
+    height: 100vh; /* Full height of the viewport */
+    overflow-y: auto; /* Add scroll for small screens or large navs */
+    /* Additional styling */
+}
+
+#content {
+    flex: 1; /* Take up the remaining width */
+    padding: 20px; /* Add some padding around the content */
+    /* Additional styling */
+}
+
+.navbar, #content {
+    overflow-y: auto; /* Allow vertical scrolling within elements if needed */
+}

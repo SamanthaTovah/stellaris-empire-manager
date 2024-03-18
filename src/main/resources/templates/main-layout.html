@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Stellaris Empire Manager</title>
+
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+    <script src="/js/empireForm.js"></script>
+    <script src="/js/empireTable.js"></script>
+</head>
+<body class="main-body">
+<div class="flex-container">
+    <div class="navbar">
+        <h2>Navigation</h2>
+        <a class="nav-link" href="/">Home</a><br>
+        <a class="nav-link" href="/empires">View Empires</a><br>
+        <a class="nav-link" href="/create-empire">Create Empire</a><br>
+        <a class="nav-link" href="/statistics">Empire Stats</a><br>
+        <a class="nav-link" href="/elo">Elo Rating</a>
+    </div>
+    <div id="content" th:replace="~{${content}}">
+        <!-- Dynamic content goes here -->
+    </div>
+    <div class="version-info">
+        <p>Commit: <span th:text="${gitCommitId}">Commit ID</span></p>
+        <p>Date: <span th:text="${gitCommitTime}">Commit Time</span></p>
+    </div>
+    <script src="/js/empireTable.js"></script>
+</div>
+<script th:inline="none">
+    $(window).on('load', function() {
+        // Initialize DataTables for any '.stats-table' elements
+        // This script runs on every full page load, ensuring fresh initialization
+        $('.stats-table').each(function() {
+            if (!$.fn.DataTable.isDataTable(this)) {
+                $(this).DataTable({
+                    "order": [] // DataTables configuration options here
+                });
+            }
+        });
+
+        // Initialize DataTable for '.view-empires-table'
+        $('.view-empires-table').DataTable({
+            "order": [[2, "desc"]],
+            "pageLength": 100,
+            "columnDefs": [{
+                "targets": 3,
+                "orderable": false // This makes the Actions column not sortable
+            }]
+        });
+    });
+</script>
+</body>
+</html>

@@ -19,7 +19,7 @@ import java.util.Queue;
 
 @Log4j2
 @Controller
-public class EloController {
+public class EloController extends ApplicationController {
 
     private final EloService eloService;
     private final EmpireRepository empireRepository;
@@ -45,10 +45,14 @@ public class EloController {
         log.debug("Matching {} ({} elo, {} comps) vs {} ({} elo, {} comps)",
                 empire1.getName(), empire1.getElo(), empire1.getEloComparisons(),
                 empire2.getName(), empire2.getElo(), empire2.getEloComparisons());
-        model.addAttribute("empires", List.of(empire1, empire2));
         this.pickedEloEmpireId1 = empire1.getId();
         this.pickedEloEmpireId2 = empire2.getId();
-        return "elo";
+
+        model.addAttribute("empires", List.of(empire1, empire2));
+        model.addAttribute(CONTENT, "fragment/elo");
+        addGitInfo(model);
+
+        return MAIN_LAYOUT;
     }
 
     @PostMapping("/elo")
@@ -70,6 +74,7 @@ public class EloController {
                 previousWinnersId.stream()
                         .map(id -> empireRepository.findById(id).orElseThrow().getName())
                         .toList());
+
         return "redirect:/elo";
     }
 }

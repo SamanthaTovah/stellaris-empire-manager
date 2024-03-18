@@ -16,11 +16,10 @@ import java.util.Optional;
 
 @Log4j2
 @Controller
-public class EmpireController {
+public class EmpireController extends ApplicationController {
 
     private static final String EMPIRE = "empire";
     private static final String TITLE = "title";
-    private static final String EMPIRE_FORM = "empire-form";
     private final EmpireRepository empireRepository;
     private final OriginRepository originRepository;
     private final AppearanceRepository appearanceRepository;
@@ -64,15 +63,23 @@ public class EmpireController {
             }
         });
         empires.sort(Comparator.comparing(Empire::getElo));
+
         model.addAttribute("empires", empires);
-        return "empire-table";
+        model.addAttribute(CONTENT, "fragment/empire-table");
+        addGitInfo(model);
+
+        return MAIN_LAYOUT;
     }
 
     @GetMapping("/empire/{id}")
     public String showEmpireDetails(@PathVariable("id") Long id, Model model) {
         Optional<Empire> empire = empireRepository.findById(id);
+
         model.addAttribute(EMPIRE, empire.orElseThrow());
-        return "empire-details";
+        model.addAttribute(CONTENT, "fragment/empire-details");
+        addGitInfo(model);
+
+        return MAIN_LAYOUT;
     }
 
     @GetMapping("/create-empire")
@@ -84,8 +91,10 @@ public class EmpireController {
         model.addAttribute(EMPIRE, newEmpire);
         model.addAttribute(TITLE, "Create New Empire");
         populateEmpireFormModel(model);
+        model.addAttribute(CONTENT, "fragment/empire-form");
+        addGitInfo(model);
 
-        return EMPIRE_FORM;
+        return MAIN_LAYOUT;
     }
 
     @GetMapping("/edit-empire/{id}")
@@ -95,8 +104,10 @@ public class EmpireController {
         model.addAttribute(EMPIRE, empire);
         model.addAttribute(TITLE, "Edit " + empire.getName());
         populateEmpireFormModel(model);
+        model.addAttribute(CONTENT, "fragment/empire-form");
+        addGitInfo(model);
 
-        return EMPIRE_FORM;
+        return MAIN_LAYOUT;
     }
 
 
@@ -106,8 +117,12 @@ public class EmpireController {
 
         if (result.hasErrors()) {
             log.error(result.getAllErrors());
+
             populateEmpireFormModel(model);
-            return EMPIRE_FORM;
+            model.addAttribute(CONTENT, "fragment/empire-form");
+            addGitInfo(model);
+
+            return MAIN_LAYOUT;
         }
 
         Long id = empire.getId();
@@ -132,6 +147,7 @@ public class EmpireController {
     @ResponseBody
     public String deleteEmpire(@PathVariable("id") Long id) {
         empireRepository.deleteById(id);
+
         return "redirect:/empires";
     }
 
