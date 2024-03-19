@@ -70,7 +70,7 @@
         <tbody>
         <tr th:each="stat : ${ethicStats}">
             <td class="image-container">
-                <img alt="Ethic" class="ethic-image" th:src="@{'/img/ethic/' + ${stat.name} + '.png'}"/>
+                <img class="ethic-image" th:alt="${stat.name}" th:src="@{'/img/ethic/' + ${stat.name} + '.png'}"/>
             </td>
             <td th:text="${stat.count}">Count</td>
         </tr>
@@ -87,7 +87,7 @@
         <tbody>
         <tr th:each="stat : ${authorityStats}">
             <td>
-                <img alt="Empire Authority" th:src="@{'/img/authority/' + ${stat.name} + '.png'}"/>
+                <img th:alt="${stat.name}" th:src="@{'/img/authority/' + ${stat.name} + '.png'}"/>
             </td>
             <td th:text="${stat.count}">Count</td>
         </tr>

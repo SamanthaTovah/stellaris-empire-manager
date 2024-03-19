@@ -15,11 +15,11 @@
         <tr th:class="${empire.winClass}" th:each="empire : ${empires}">
             <td th:text="${empire.name}">Saathid Directorate</td>
             <td class="image-container">
-                <img alt="Ethic" class="ethic-image" th:each="ethic : ${empire.ethics}"
+                <img class="ethic-image" th:alt="${ethic}" th:each="ethic : ${empire.ethics}"
                      th:src="@{'/img/ethic/' + ${ethic} + '.png'}"/>
             </td>
             <td>
-                <img alt="Empire Authority" th:src="@{'/img/authority/' + ${empire.authority} + '.png'}"/>
+                <img th:alt="${empire.authority}" th:src="@{'/img/authority/' + ${empire.authority} + '.png'}"/>
             </td>
             <td th:text="${empire.government.name}">Science Directorate</td>
             <td th:text="${empire.elo}"></td>
