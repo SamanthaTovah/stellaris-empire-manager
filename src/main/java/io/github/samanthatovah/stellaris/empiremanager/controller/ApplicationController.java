@@ -15,16 +15,11 @@ public abstract class ApplicationController {
 
     protected void addGitInfo(Model model) {
         String gitCommitIdShort = gitCommitId;
-        String gitCommitTimeShort = gitCommitTime;
-
         if (gitCommitId != null && gitCommitId.length() > 7) {
             gitCommitIdShort = gitCommitId.substring(0, 7);
         }
-        if (gitCommitTime != null && gitCommitTime.length() > 10) {
-            gitCommitTimeShort = gitCommitTime.substring(0, 10);
-        }
 
         model.addAttribute("gitCommitId", gitCommitIdShort);
-        model.addAttribute("gitCommitTime", gitCommitTimeShort);
+        model.addAttribute("gitCommitTime", gitCommitTime);
     }
 }
