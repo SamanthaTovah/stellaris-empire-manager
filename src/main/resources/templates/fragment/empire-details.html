@@ -28,11 +28,9 @@
         <div class="detail-item"><span th:text="${empire.homeworld.origin.name}">Origin Here</span></div>
 
         <div class="detail-item empire-table-header"><strong>Ethics</strong></div>
-        <div class="detail-item">
-            <span th:each="ethic : ${empire.ethics}">
-                <span th:text="${ethic}">Ethic Here</span><span
-                    th:if="${ethicStat.index + 1} &lt; ${empire.ethics.size()}">, </span>
-            </span>
+        <div class="detail-item image-container">
+            <img alt="Ethic" class="ethic-image" th:each="ethic : ${empire.ethics}"
+                 th:src="@{'/img/ethic/' + ${ethic} + '.png'}"/>
         </div>
 
         <div class="detail-item empire-table-header"><strong>Authority</strong></div>

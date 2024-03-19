@@ -1,6 +1,7 @@
 package io.github.samanthatovah.stellaris.empiremanager.controller;
 
 import io.github.samanthatovah.stellaris.empiremanager.model.Empire;
+import io.github.samanthatovah.stellaris.empiremanager.model.Ethic;
 import io.github.samanthatovah.stellaris.empiremanager.repository.EmpireRepository;
 import io.github.samanthatovah.stellaris.empiremanager.service.EloService;
 import io.github.samanthatovah.stellaris.empiremanager.util.EloComparator;
@@ -38,6 +39,10 @@ public class EloController extends ApplicationController {
         empires.sort(new EloComparator(previousWinnersId));
         Empire empire1 = empires.get(0);
         Empire empire2 = empires.get(1);
+
+        empire1.getEthics().sort(Ethic.comparator);
+        empire2.getEthics().sort(Ethic.comparator);
+
         for (int i = 0; i < 5 && i < empires.size(); i++) {
             Empire empire = empires.get(i);
             log.debug("{}:\t{}\t{}", empire.getEloComparisons(), empire.getElo(), empire.getName());

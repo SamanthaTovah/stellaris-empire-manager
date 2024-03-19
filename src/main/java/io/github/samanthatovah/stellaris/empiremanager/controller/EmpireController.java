@@ -52,6 +52,8 @@ public class EmpireController extends ApplicationController {
     public String showEmpireTable(Model model) {
         List<Empire> empires = empireRepository.findAll();
         empires.forEach(empire -> {
+            empire.getEthics().sort(Ethic.comparator);
+
             if (Boolean.TRUE.equals(empire.getWonLargeGalaxy())) {
                 empire.setWinClass("win-large");
             } else if (Boolean.TRUE.equals(empire.getWonMediumGalaxy())) {

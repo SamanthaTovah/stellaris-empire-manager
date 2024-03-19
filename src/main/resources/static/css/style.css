@@ -159,3 +159,10 @@ h1, h2 {
 .authority-image {
     padding: 5px;
 }
+
+.ethic-image {
+    display:inline-block;
+    margin: 0 5px;
+    width: 44px;
+    height: 44px;
+}

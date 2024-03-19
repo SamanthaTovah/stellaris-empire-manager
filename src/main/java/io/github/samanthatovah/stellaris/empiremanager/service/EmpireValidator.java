@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import java.util.Set;
+import java.util.List;
 
 @Service
 public class EmpireValidator implements Validator {
@@ -59,7 +59,7 @@ public class EmpireValidator implements Validator {
         }
     }
 
-    private boolean validateEthicsPoints(Set<Ethic> ethics) {
+    private boolean validateEthicsPoints(List<Ethic> ethics) {
         int sum = 0;
         for (Ethic ethic : ethics) {
             sum += ethic.getPoints();

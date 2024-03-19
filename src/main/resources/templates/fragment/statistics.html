@@ -69,7 +69,9 @@
         </thead>
         <tbody>
         <tr th:each="stat : ${ethicStats}">
-            <td th:text="${stat.name}">Origin</td>
+            <td class="image-container">
+                <img alt="Ethic" class="ethic-image" th:src="@{'/img/ethic/' + ${stat.name} + '.png'}"/>
+            </td>
             <td th:text="${stat.count}">Count</td>
         </tr>
         </tbody>

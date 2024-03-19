@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.validation.Errors;
 
+import java.util.List;
 import java.util.Set;
 
 import static org.mockito.ArgumentMatchers.anyString;
@@ -42,7 +43,7 @@ class EmpireValidatorTest {
         empire.getHomeworld().getPlanetClass().setName("Shattered Ring World");
         empire.getHomeworld().setOrigin(new Origin());
         empire.getHomeworld().getOrigin().setName("Shattered Ring");
-        empire.setEthics(Set.of(Ethic.XENOPHOBE, Ethic.MATERIALIST, Ethic.PACIFIST));
+        empire.setEthics(List.of(Ethic.XENOPHOBE, Ethic.MATERIALIST, Ethic.PACIFIST));
         empire.setAuthority(Authority.OLIGARCHIC);
         Civic technocracy = new Civic();
         technocracy.setName("Technocracy");
@@ -102,7 +103,7 @@ class EmpireValidatorTest {
     @Test
     void validateWithInvalidEthicsPoints() {
         // Adjusting ethics to make them invalid
-        empire.setEthics(Set.of(Ethic.FANATIC_XENOPHILE, Ethic.FANATIC_MILITARIST));
+        empire.setEthics(List.of(Ethic.FANATIC_XENOPHILE, Ethic.FANATIC_MILITARIST));
         validator.validate(empire, errors);
         verify(errors).rejectValue(eq("ethics"), eq("ethics.invalid_sum"), anyString());
     }

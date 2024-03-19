@@ -4,11 +4,15 @@
         <!-- Empire 1 -->
         <div class="empire" th:attr="data-empire-id=${empire1.id}" th:id="'empire-' + ${empire1.id}">
             <h2 th:text="${empire1.name}"></h2>
-            <span th:text="${empire1.government.name}"></span>
+            <div class="image-container">
+                <img alt="Ethic" class="ethic-image" th:each="ethic : ${empire1.ethics}"
+                     th:src="@{'/img/ethic/' + ${ethic} + '.png'}"/>
+            </div>
             <div class="image-container">
                 <img alt="Empire Authority" class="authority-image"
                      th:src="@{'/img/authority/' + ${empire1.authority} + '.png'}"/>
             </div>
+            <strong><span th:text="${empire1.government.name}"></span></strong>
             <div th:each="civic : ${empire1.civics}" th:text="${civic.name}"></div>
             <!-- Hidden Form to select Empire 1 as Winner -->
             <form method="post" th:action="@{/elo}" th:id="'form-empire-' + ${empire1.id}">
@@ -19,11 +23,15 @@
         <!-- Empire 2 -->
         <div class="empire" th:attr="data-empire-id=${empire2.id}" th:id="'empire-' + ${empire2.id}">
             <h2 th:text="${empire2.name}"></h2>
-            <span th:text="${empire2.government.name}"></span>
+            <div class="image-container">
+                <img alt="Ethic" class="ethic-image" th:each="ethic : ${empire2.ethics}"
+                     th:src="@{'/img/ethic/' + ${ethic} + '.png'}"/>
+            </div>
             <div class="image-container">
                 <img alt="Empire Authority" class="authority-image"
                      th:src="@{'/img/authority/' + ${empire2.authority} + '.png'}"/>
             </div>
+            <strong><span th:text="${empire2.government.name}"></span></strong>
             <div th:each="civic : ${empire2.civics}" th:text="${civic.name}"></div>
             <!-- Hidden Form to select Empire 2 as Winner -->
             <form method="post" th:action="@{/elo}" th:id="'form-empire-' + ${empire2.id}">

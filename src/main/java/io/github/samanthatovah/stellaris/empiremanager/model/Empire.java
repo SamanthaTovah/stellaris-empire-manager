@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -34,7 +36,7 @@ public class Empire {
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "empire_ethics", joinColumns = @JoinColumn(name = "empire"))
     @Column(name = "ethic", nullable = false)
-    private Set<Ethic> ethics = new HashSet<>();
+    private List<Ethic> ethics = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
