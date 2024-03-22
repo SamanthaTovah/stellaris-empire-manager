@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CivicRepository extends JpaRepository<Civic, Long> {
 
+    Civic findByName(String civicName);
 }

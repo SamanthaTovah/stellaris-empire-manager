@@ -1,35 +1,49 @@
 package io.github.samanthatovah.stellaris.empiremanager.service;
 
 import io.github.samanthatovah.stellaris.empiremanager.dto.Statistic;
-import io.github.samanthatovah.stellaris.empiremanager.repository.HomeworldRepository;
+import io.github.samanthatovah.stellaris.empiremanager.model.Empire;
+import io.github.samanthatovah.stellaris.empiremanager.model.Origin;
+import io.github.samanthatovah.stellaris.empiremanager.repository.EmpireRepository;
 import io.github.samanthatovah.stellaris.empiremanager.repository.OriginRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 public class OriginService {
 
     private final OriginRepository originRepository;
-    private final HomeworldRepository homeworldRepository;
+    private final EmpireRepository empireRepository;
 
-    public OriginService(OriginRepository originRepository, HomeworldRepository homeworldRepository) {
+    public OriginService(OriginRepository originRepository, EmpireRepository empireRepository) {
         this.originRepository = originRepository;
-        this.homeworldRepository = homeworldRepository;
+        this.empireRepository = empireRepository;
     }
 
     public List<Statistic> getCountStats() {
+        List<Origin> allOrigins = originRepository.findAll();
+        List<Statistic> stats = new ArrayList<>();
 
-        Map<String, Long> counts = homeworldRepository.findAll().stream()
-                .collect(Collectors.groupingBy(homeworld -> homeworld.getOrigin().getName(), Collectors.counting()));
+        for (Origin origin : allOrigins) {
+            Set<Long> empireIds = getEmpireIds(origin.getName());
+            stats.add(new Statistic(origin.getName(), empireIds));
+        }
 
-        originRepository.findAll().forEach(origin -> counts.putIfAbsent(origin.getName(), 0L));
+        Collections.sort(stats);
 
-        return counts.entrySet().stream()
-                .map(entry -> new Statistic(entry.getKey(), entry.getValue()))
-                .sorted()
-                .toList();
+        return stats;
+    }
+
+    private Set<Long> getEmpireIds(String originName) {
+        Origin origin = originRepository.findByName(originName);
+
+        return empireRepository.findAll().stream()
+                .filter(e -> e.getHomeworld().getOrigin().equals(origin))
+                .map(Empire::getId)
+                .collect(Collectors.toSet());
     }
 }

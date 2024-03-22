@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface GovernmentRepository extends JpaRepository<Government, Long> {
 
+    Government findByName(String governmentName);
 }

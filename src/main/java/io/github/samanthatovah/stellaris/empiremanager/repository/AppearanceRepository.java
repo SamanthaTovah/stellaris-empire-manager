@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AppearanceRepository extends JpaRepository<Appearance, Long> {
 
+    Appearance findByName(String appearanceName);
 }

@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TraitRepository extends JpaRepository<Trait, Long> {
 
+    Trait findByName(String traitName);
 }

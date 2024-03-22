@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OriginRepository extends JpaRepository<Origin, Long> {
 
+    Origin findByName(String originName);
 }

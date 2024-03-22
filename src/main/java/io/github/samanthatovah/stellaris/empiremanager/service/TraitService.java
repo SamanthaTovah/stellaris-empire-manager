@@ -1,39 +1,49 @@
 package io.github.samanthatovah.stellaris.empiremanager.service;
 
 import io.github.samanthatovah.stellaris.empiremanager.dto.Statistic;
+import io.github.samanthatovah.stellaris.empiremanager.model.Empire;
 import io.github.samanthatovah.stellaris.empiremanager.model.Trait;
-import io.github.samanthatovah.stellaris.empiremanager.repository.SpeciesRepository;
+import io.github.samanthatovah.stellaris.empiremanager.repository.EmpireRepository;
 import io.github.samanthatovah.stellaris.empiremanager.repository.TraitRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 public class TraitService {
 
     private final TraitRepository traitRepository;
-    private final SpeciesRepository speciesRepository;
+    private final EmpireRepository empireRepository;
 
-    public TraitService(TraitRepository traitRepository, SpeciesRepository speciesRepository) {
+    public TraitService(TraitRepository traitRepository, EmpireRepository empireRepository) {
         this.traitRepository = traitRepository;
-        this.speciesRepository = speciesRepository;
+        this.empireRepository = empireRepository;
     }
 
     public List<Statistic> getCountStats() {
+        List<Trait> allTraits = traitRepository.findAll();
+        List<Statistic> stats = new ArrayList<>();
 
-        Map<String, Long> counts = speciesRepository.findAll().stream()
-                .flatMap(species -> species.getTraits().stream())
-                .map(Trait::getName)
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        for (Trait trait : allTraits) {
+            Set<Long> empireIds = getEmpireIds(trait.getName());
+            stats.add(new Statistic(trait.getName(), empireIds));
+        }
 
-        traitRepository.findAll().forEach(appearance -> counts.putIfAbsent(appearance.getName(), 0L));
+        Collections.sort(stats);
 
-        return counts.entrySet().stream()
-                .map(entry -> new Statistic(entry.getKey(), entry.getValue()))
-                .sorted()
-                .toList();
+        return stats;
+    }
+
+    private Set<Long> getEmpireIds(String traitName) {
+        Trait trait = traitRepository.findByName(traitName);
+
+        return empireRepository.findAll().stream()
+                .filter(e -> e.getSpecies().getTraits().contains(trait))
+                .map(Empire::getId)
+                .collect(Collectors.toSet());
     }
 }

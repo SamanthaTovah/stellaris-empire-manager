@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Log4j2
 @Controller
@@ -50,7 +51,33 @@ public class EmpireController extends ApplicationController {
 
     @GetMapping("/empires")
     public String showEmpireTable(Model model) {
+        List<Empire> empires = processEmpires(null);
+        model.addAttribute("empires", empires);
+        model.addAttribute(CONTENT, "fragment/empire-table");
+        addGitInfo(model);
+
+        return MAIN_LAYOUT;
+    }
+
+    @GetMapping("/filtered-empires")
+    public String showFilteredEmpireTable(@RequestParam List<Long> empireIds, Model model) {
+        List<Empire> empires = processEmpires(empireIds);
+        model.addAttribute("empires", empires);
+        model.addAttribute(CONTENT, "fragment/empire-table");
+        addGitInfo(model);
+
+        return MAIN_LAYOUT;
+    }
+
+    private List<Empire> processEmpires(List<Long> filterEmpireIds) {
         List<Empire> empires = empireRepository.findAll();
+
+        if (filterEmpireIds != null) {
+            empires = empires.stream()
+                    .filter(empire -> filterEmpireIds.contains(empire.getId()))
+                    .collect(Collectors.toList());
+        }
+
         empires.forEach(empire -> {
             empire.getEthics().sort(Ethic.comparator);
 
@@ -66,11 +93,7 @@ public class EmpireController extends ApplicationController {
         });
         empires.sort(Comparator.comparing(Empire::getElo));
 
-        model.addAttribute("empires", empires);
-        model.addAttribute(CONTENT, "fragment/empire-table");
-        addGitInfo(model);
-
-        return MAIN_LAYOUT;
+        return empires;
     }
 
     @GetMapping("/empire/{id}")

@@ -2,13 +2,15 @@ package io.github.samanthatovah.stellaris.empiremanager.service;
 
 import io.github.samanthatovah.stellaris.empiremanager.dto.Statistic;
 import io.github.samanthatovah.stellaris.empiremanager.model.Civic;
+import io.github.samanthatovah.stellaris.empiremanager.model.Empire;
 import io.github.samanthatovah.stellaris.empiremanager.repository.CivicRepository;
 import io.github.samanthatovah.stellaris.empiremanager.repository.EmpireRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,17 +25,25 @@ public class CivicService {
     }
 
     public List<Statistic> getCountStats() {
+        List<Civic> allCivics = civicRepository.findAll();
+        List<Statistic> stats = new ArrayList<>();
 
-        Map<String, Long> counts = empireRepository.findAll().stream()
-                .flatMap(empire -> empire.getCivics().stream())
-                .map(Civic::getName)
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        for (Civic civic : allCivics) {
+            Set<Long> empireIds = getEmpireIds(civic.getName());
+            stats.add(new Statistic(civic.getName(), empireIds));
+        }
 
-        civicRepository.findAll().forEach(civic -> counts.putIfAbsent(civic.getName(), 0L));
+        Collections.sort(stats);
 
-        return counts.entrySet().stream()
-                .map(entry -> new Statistic(entry.getKey(), entry.getValue()))
-                .sorted()
-                .toList();
+        return stats;
+    }
+
+    private Set<Long> getEmpireIds(String civicName) {
+        Civic civic = civicRepository.findByName(civicName);
+
+        return empireRepository.findAll().stream()
+                .filter(e -> e.getCivics().contains(civic))
+                .map(Empire::getId)
+                .collect(Collectors.toSet());
     }
 }

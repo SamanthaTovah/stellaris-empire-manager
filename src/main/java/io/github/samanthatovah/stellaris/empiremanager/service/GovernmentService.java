@@ -1,12 +1,16 @@
 package io.github.samanthatovah.stellaris.empiremanager.service;
 
 import io.github.samanthatovah.stellaris.empiremanager.dto.Statistic;
+import io.github.samanthatovah.stellaris.empiremanager.model.Empire;
+import io.github.samanthatovah.stellaris.empiremanager.model.Government;
 import io.github.samanthatovah.stellaris.empiremanager.repository.EmpireRepository;
 import io.github.samanthatovah.stellaris.empiremanager.repository.GovernmentRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,15 +25,25 @@ public class GovernmentService {
     }
 
     public List<Statistic> getCountStats() {
+        List<Government> allGovernments = governmentRepository.findAll();
+        List<Statistic> stats = new ArrayList<>();
 
-        Map<String, Long> counts = empireRepository.findAll().stream()
-                .collect(Collectors.groupingBy(empire -> empire.getGovernment().getName(), Collectors.counting()));
+        for (Government government : allGovernments) {
+            Set<Long> empireIds = getEmpireIds(government.getName());
+            stats.add(new Statistic(government.getName(), empireIds));
+        }
 
-        governmentRepository.findAll().forEach(government -> counts.putIfAbsent(government.getName(), 0L));
+        Collections.sort(stats);
 
-        return counts.entrySet().stream()
-                .map(entry -> new Statistic(entry.getKey(), entry.getValue()))
-                .sorted()
-                .toList();
+        return stats;
+    }
+
+    private Set<Long> getEmpireIds(String governmentName) {
+        Government government = governmentRepository.findByName(governmentName);
+
+        return empireRepository.findAll().stream()
+                .filter(e -> e.getGovernment().equals(government))
+                .map(Empire::getId)
+                .collect(Collectors.toSet());
     }
 }
