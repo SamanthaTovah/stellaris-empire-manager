@@ -1,10 +1,11 @@
 package io.github.samanthatovah.stellaris.empiremanager;
 
-import io.github.samanthatovah.stellaris.empiremanager.config.SecurityConfig;
-import io.github.samanthatovah.stellaris.empiremanager.model.Empire;
+import io.github.samanthatovah.stellaris.empiremanager.domain.empire.Empire;
+import io.github.samanthatovah.stellaris.empiremanager.infrastructure.security.SecurityConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
@@ -16,7 +17,8 @@ import javax.sql.DataSource;
 
 @SpringBootApplication
 @EnableAutoConfiguration
-@EnableJpaRepositories(basePackages = "io.github.samanthatovah.stellaris.empiremanager")
+@EntityScan("io.github.samanthatovah.stellaris.empiremanager.domain")
+@EnableJpaRepositories(basePackages = "io.github.samanthatovah.stellaris.empiremanager.domain")
 @Import(SecurityConfig.class)
 @PropertySource("git.properties")
 public class StellarisEmpireManagerApplication {
@@ -31,6 +33,7 @@ public class StellarisEmpireManagerApplication {
         entityManagerFactory.setDataSource(dataSource);
         entityManagerFactory.setPackagesToScan(Empire.class.getPackage().getName());
         entityManagerFactory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+        entityManagerFactory.setPackagesToScan("io.github.samanthatovah.stellaris.empiremanager.domain");
         return entityManagerFactory;
     }
 

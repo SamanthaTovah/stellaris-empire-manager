@@ -1,6 +1,15 @@
 package io.github.samanthatovah.stellaris.empiremanager.service;
 
-import io.github.samanthatovah.stellaris.empiremanager.model.*;
+import io.github.samanthatovah.stellaris.empiremanager.domain.appearance.Appearance;
+import io.github.samanthatovah.stellaris.empiremanager.domain.authority.Authority;
+import io.github.samanthatovah.stellaris.empiremanager.domain.civic.Civic;
+import io.github.samanthatovah.stellaris.empiremanager.domain.empire.Empire;
+import io.github.samanthatovah.stellaris.empiremanager.domain.empire.EmpireValidator;
+import io.github.samanthatovah.stellaris.empiremanager.domain.ethic.Ethic;
+import io.github.samanthatovah.stellaris.empiremanager.domain.homeworld.Homeworld;
+import io.github.samanthatovah.stellaris.empiremanager.domain.origin.Origin;
+import io.github.samanthatovah.stellaris.empiremanager.domain.planetclass.PlanetClass;
+import io.github.samanthatovah.stellaris.empiremanager.domain.species.Species;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
