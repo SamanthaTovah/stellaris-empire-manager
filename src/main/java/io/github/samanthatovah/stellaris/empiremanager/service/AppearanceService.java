@@ -18,10 +18,13 @@ public class AppearanceService {
 
     private final AppearanceRepository appearanceRepository;
     private final EmpireRepository empireRepository;
+    private final StatisticFactory statisticFactory;
 
-    public AppearanceService(AppearanceRepository appearanceRepository, EmpireRepository empireRepository) {
+    public AppearanceService(AppearanceRepository appearanceRepository, EmpireRepository empireRepository,
+                             StatisticFactory statisticFactory) {
         this.appearanceRepository = appearanceRepository;
         this.empireRepository = empireRepository;
+        this.statisticFactory = statisticFactory;
     }
 
     public List<Statistic> getCountStats() {
@@ -30,7 +33,7 @@ public class AppearanceService {
 
         for (Appearance appearance : allAppearances) {
             Set<Long> empireIds = getEmpireIds(appearance.getName());
-            stats.add(new Statistic(appearance.getName(), empireIds));
+            stats.add(statisticFactory.createStatistic(appearance.getName(), empireIds));
         }
 
         Collections.sort(stats);

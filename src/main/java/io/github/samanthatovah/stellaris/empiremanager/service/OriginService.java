@@ -18,10 +18,13 @@ public class OriginService {
 
     private final OriginRepository originRepository;
     private final EmpireRepository empireRepository;
+    private final StatisticFactory statisticFactory;
 
-    public OriginService(OriginRepository originRepository, EmpireRepository empireRepository) {
+    public OriginService(OriginRepository originRepository, EmpireRepository empireRepository,
+                         StatisticFactory statisticFactory) {
         this.originRepository = originRepository;
         this.empireRepository = empireRepository;
+        this.statisticFactory = statisticFactory;
     }
 
     public List<Statistic> getCountStats() {
@@ -30,7 +33,7 @@ public class OriginService {
 
         for (Origin origin : allOrigins) {
             Set<Long> empireIds = getEmpireIds(origin.getName());
-            stats.add(new Statistic(origin.getName(), empireIds));
+            stats.add(statisticFactory.createStatistic(origin.getName(), empireIds));
         }
 
         Collections.sort(stats);

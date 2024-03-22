@@ -18,10 +18,13 @@ public class CivicService {
 
     private final CivicRepository civicRepository;
     private final EmpireRepository empireRepository;
+    private final StatisticFactory statisticFactory;
 
-    public CivicService(CivicRepository civicRepository, EmpireRepository empireRepository) {
+    public CivicService(CivicRepository civicRepository, EmpireRepository empireRepository,
+                        StatisticFactory statisticFactory) {
         this.civicRepository = civicRepository;
         this.empireRepository = empireRepository;
+        this.statisticFactory = statisticFactory;
     }
 
     public List<Statistic> getCountStats() {
@@ -30,7 +33,7 @@ public class CivicService {
 
         for (Civic civic : allCivics) {
             Set<Long> empireIds = getEmpireIds(civic.getName());
-            stats.add(new Statistic(civic.getName(), empireIds));
+            stats.add(statisticFactory.createStatistic(civic.getName(), empireIds));
         }
 
         Collections.sort(stats);

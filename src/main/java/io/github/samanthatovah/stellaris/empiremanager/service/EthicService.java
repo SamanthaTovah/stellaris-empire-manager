@@ -12,9 +12,11 @@ import java.util.stream.Collectors;
 @Service
 public class EthicService {
     private final EmpireRepository empireRepository;
+    private final StatisticFactory statisticFactory;
 
-    public EthicService(EmpireRepository empireRepository) {
+    public EthicService(EmpireRepository empireRepository, StatisticFactory statisticFactory) {
         this.empireRepository = empireRepository;
+        this.statisticFactory = statisticFactory;
     }
 
     public List<Statistic> getCountStats() {
@@ -26,7 +28,7 @@ public class EthicService {
 
         for (String ethic : allEthics) {
             Set<Long> empireIds = getEmpireIds(ethic);
-            stats.add(new Statistic(ethic, empireIds));
+            stats.add(statisticFactory.createStatistic(ethic, empireIds));
         }
 
         Collections.sort(stats);

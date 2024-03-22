@@ -18,10 +18,13 @@ public class GovernmentService {
 
     private final GovernmentRepository governmentRepository;
     private final EmpireRepository empireRepository;
+    private final StatisticFactory statisticFactory;
 
-    public GovernmentService(GovernmentRepository governmentRepository, EmpireRepository empireRepository) {
+    public GovernmentService(GovernmentRepository governmentRepository, EmpireRepository empireRepository,
+                             StatisticFactory statisticFactory) {
         this.governmentRepository = governmentRepository;
         this.empireRepository = empireRepository;
+        this.statisticFactory = statisticFactory;
     }
 
     public List<Statistic> getCountStats() {
@@ -30,7 +33,7 @@ public class GovernmentService {
 
         for (Government government : allGovernments) {
             Set<Long> empireIds = getEmpireIds(government.getName());
-            stats.add(new Statistic(government.getName(), empireIds));
+            stats.add(statisticFactory.createStatistic(government.getName(), empireIds));
         }
 
         Collections.sort(stats);

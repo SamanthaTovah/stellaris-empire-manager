@@ -18,10 +18,13 @@ public class PlanetClassService {
 
     private final PlanetClassRepository planetClassRepository;
     private final EmpireRepository empireRepository;
+    private final StatisticFactory statisticFactory;
 
-    public PlanetClassService(PlanetClassRepository planetClassRepository, EmpireRepository empireRepository) {
+    public PlanetClassService(PlanetClassRepository planetClassRepository, EmpireRepository empireRepository,
+                              StatisticFactory statisticFactory) {
         this.planetClassRepository = planetClassRepository;
         this.empireRepository = empireRepository;
+        this.statisticFactory = statisticFactory;
     }
 
     public List<Statistic> getCountStats() {
@@ -30,7 +33,7 @@ public class PlanetClassService {
 
         for (PlanetClass planetClass : allPlanetClasss) {
             Set<Long> empireIds = getEmpireIds(planetClass.getName());
-            stats.add(new Statistic(planetClass.getName(), empireIds));
+            stats.add(statisticFactory.createStatistic(planetClass.getName(), empireIds));
         }
 
         Collections.sort(stats);

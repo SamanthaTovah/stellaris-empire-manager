@@ -18,10 +18,13 @@ public class TraitService {
 
     private final TraitRepository traitRepository;
     private final EmpireRepository empireRepository;
+    private final StatisticFactory statisticFactory;
 
-    public TraitService(TraitRepository traitRepository, EmpireRepository empireRepository) {
+    public TraitService(TraitRepository traitRepository, EmpireRepository empireRepository,
+                        StatisticFactory statisticFactory) {
         this.traitRepository = traitRepository;
         this.empireRepository = empireRepository;
+        this.statisticFactory = statisticFactory;
     }
 
     public List<Statistic> getCountStats() {
@@ -30,7 +33,7 @@ public class TraitService {
 
         for (Trait trait : allTraits) {
             Set<Long> empireIds = getEmpireIds(trait.getName());
-            stats.add(new Statistic(trait.getName(), empireIds));
+            stats.add(statisticFactory.createStatistic(trait.getName(), empireIds));
         }
 
         Collections.sort(stats);
