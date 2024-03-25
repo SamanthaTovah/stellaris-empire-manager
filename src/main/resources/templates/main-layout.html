@@ -14,8 +14,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
     <script src="/js/empireForm.js"></script>
-    <script src="/js/empireTable.js"></script>
     <script src="/js/statistics.js"></script>
+    <script src="/js/dataTablesInit.js"></script>
 </head>
 <body class="main-body">
 <div class="flex-container">
@@ -46,16 +46,6 @@
                     "order": [] // DataTables configuration options here
                 });
             }
-        });
-
-        // Initialize DataTable for '.view-empires-table'
-        $('.view-empires-table').DataTable({
-            "order": [[4, "desc"]],
-            "pageLength": 100,
-            "columnDefs": [{
-                "targets": [1, 2, 5],
-                "orderable": false
-            }]
         });
     });
 </script>
