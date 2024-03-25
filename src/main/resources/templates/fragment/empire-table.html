@@ -12,7 +12,9 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:class="${empire.winClass}" th:each="empire : ${empires}">
+        <tr class="clickable-row-empire" th:classappend="${empire.winClass}"
+            th:data-empire-id="${empire.id}"
+            th:each="empire : ${empires}">
             <td th:text="${empire.name}">Saathid Directorate</td>
             <td class="image-container">
                 <img class="ethic-image" th:alt="${ethic}" th:each="ethic : ${empire.ethics}"
@@ -24,7 +26,6 @@
             <td th:text="${empire.government.name}">Science Directorate</td>
             <td th:text="${empire.elo}"></td>
             <td>
-                <button th:onclick="'location.href=\'/empire/' + ${empire.id} + '\';'" type="button">View</button>
                 <button th:onclick="'location.href=\'/edit-empire/' + ${empire.id} + '\';'" type="button">Edit</button>
                 <button th:onclick="'confirmDelete(' + ${empire.id} + ');'" type="button">Delete</button>
             </td>

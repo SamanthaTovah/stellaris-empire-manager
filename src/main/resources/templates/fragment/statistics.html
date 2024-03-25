@@ -9,7 +9,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr class="clickable-row" th:data-empire-ids="${stat.empireIds}" th:each="stat : ${appearanceStats}">
+        <tr class="clickable-row-empires" th:data-empire-ids="${stat.empireIds}" th:each="stat : ${appearanceStats}">
             <td th:text="${stat.name}">Appearance</td>
             <td th:text="${stat.count}">Empires</td>
             <td th:text="${stat.elo}">Elo</td>
@@ -26,7 +26,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr class="clickable-row" th:data-empire-ids="${stat.empireIds}" th:each="stat : ${traitStats}">
+        <tr class="clickable-row-empires" th:data-empire-ids="${stat.empireIds}" th:each="stat : ${traitStats}">
             <td th:text="${stat.name}">Trait</td>
             <td th:text="${stat.count}">Empires</td>
             <td th:text="${stat.elo}">Elo</td>
@@ -43,7 +43,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr class="clickable-row" th:data-empire-ids="${stat.empireIds}" th:each="stat : ${planetClassStats}">
+        <tr class="clickable-row-empires" th:data-empire-ids="${stat.empireIds}" th:each="stat : ${planetClassStats}">
             <td th:text="${stat.name}">Trait</td>
             <td th:text="${stat.count}">Empires</td>
             <td th:text="${stat.elo}">Elo</td>
@@ -60,7 +60,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr class="clickable-row" th:data-empire-ids="${stat.empireIds}" th:each="stat : ${originStats}">
+        <tr class="clickable-row-empires" th:data-empire-ids="${stat.empireIds}" th:each="stat : ${originStats}">
             <td th:text="${stat.name}">Origin</td>
             <td th:text="${stat.count}">Empires</td>
             <td th:text="${stat.elo}">Elo</td>
@@ -77,7 +77,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr class="clickable-row" th:data-empire-ids="${stat.empireIds}" th:each="stat : ${ethicStats}">
+        <tr class="clickable-row-empires" th:data-empire-ids="${stat.empireIds}" th:each="stat : ${ethicStats}">
             <td class="image-container">
                 <img class="ethic-image" th:alt="${stat.name}" th:src="@{'/img/ethic/' + ${stat.name} + '.png'}"/>
             </td>
@@ -96,7 +96,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr class="clickable-row" th:data-empire-ids="${stat.empireIds}" th:each="stat : ${authorityStats}">
+        <tr class="clickable-row-empires" th:data-empire-ids="${stat.empireIds}" th:each="stat : ${authorityStats}">
             <td>
                 <img th:alt="${stat.name}" th:src="@{'/img/authority/' + ${stat.name} + '.png'}"/>
             </td>
@@ -115,7 +115,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr class="clickable-row" th:data-empire-ids="${stat.empireIds}" th:each="stat : ${governmentStats}">
+        <tr class="clickable-row-empires" th:data-empire-ids="${stat.empireIds}" th:each="stat : ${governmentStats}">
             <td th:text="${stat.name}">Government</td>
             <td th:text="${stat.count}">Empires</td>
             <td th:text="${stat.elo}">Elo</td>
@@ -132,7 +132,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr class="clickable-row" th:data-empire-ids="${stat.empireIds}" th:each="stat : ${civicStats}">
+        <tr class="clickable-row-empires" th:data-empire-ids="${stat.empireIds}" th:each="stat : ${civicStats}">
             <td th:text="${stat.name}">Civic</td>
             <td th:text="${stat.count}">Empires</td>
             <td th:text="${stat.elo}">Elo</td>

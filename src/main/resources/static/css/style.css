@@ -168,6 +168,10 @@ h1, h2 {
     min-width: 147px;
 }
 
-.clickable-row {
+.clickable-row-empires {
+    cursor: pointer;
+}
+
+.clickable-row-empire {
     cursor: pointer;
 }

@@ -5,3 +5,16 @@ function confirmDelete(empireId) {
         }).then(response => window.location.reload());
     }
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll('.clickable-row-empire').forEach(function(row) {
+        row.addEventListener('click', function() {
+            var empireId = this.getAttribute('data-empire-id');
+            if (empireId === null) {
+                window.location.href = '/empires';
+            } else {
+                window.location.href = '/empire/' + empireId;
+            }
+        });
+    });
+});
