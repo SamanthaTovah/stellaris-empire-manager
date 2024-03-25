@@ -9,11 +9,13 @@ function confirmDelete(empireId) {
 document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll('.clickable-row-empire').forEach(function(row) {
         row.addEventListener('click', function() {
-            var empireId = this.getAttribute('data-empire-id');
-            if (empireId === null) {
-                window.location.href = '/empires';
-            } else {
-                window.location.href = '/empire/' + empireId;
+            if (!event.target.closest('button')) {
+                var empireId = this.getAttribute('data-empire-id');
+                if (empireId === null) {
+                    window.location.href = '/empires';
+                } else {
+                    window.location.href = '/empire/' + empireId;
+                }
             }
         });
     });
