@@ -10,17 +10,19 @@ import java.util.Set;
 public class Statistic implements Comparable<Statistic> {
 
     private final String name;
-    private final int count;
-    private final Set<Long> empireIds;
     private final int elo;
-    private final long wins;
+    private final Set<Long> empireIds;
+    private final Set<Long> empireIdsWon;
+    private final int count;
+    private final int wins;
 
-    Statistic(String name, int count, Set<Long> empireIds, int elo, long wins) {
+    Statistic(String name, int elo, Set<Long> empireIds, Set<Long> empireIdsWon) {
         this.name = name;
-        this.count = count;
-        this.empireIds = empireIds;
         this.elo = elo;
-        this.wins = wins;
+        this.empireIds = empireIds;
+        this.empireIdsWon = empireIdsWon;
+        this.count = empireIds.size();
+        this.wins = empireIdsWon.size();
     }
 
     @Override

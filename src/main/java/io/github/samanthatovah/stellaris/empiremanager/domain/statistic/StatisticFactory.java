@@ -17,9 +17,8 @@ public class StatisticFactory {
 
     public Statistic createStatistic(String name, Set<Long> empireIds) {
         int elo = statisticService.getAverageElo(empireIds);
-        int count = empireIds.size();
-        long wins = empireService.getWinsFromIds(empireIds);
+        Set<Long> empireIdsWon = empireService.getIdsWonFromIds(empireIds);
 
-        return new Statistic(name, count, empireIds, elo, wins);
+        return new Statistic(name, elo, empireIds, empireIdsWon);
     }
 }

@@ -3,6 +3,7 @@ package io.github.samanthatovah.stellaris.empiremanager.domain.empire;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class EmpireService {
@@ -13,10 +14,11 @@ public class EmpireService {
         this.empireRepository = empireRepository;
     }
 
-    public long getWinsFromIds(Set<Long> empireIds) {
+    public Set<Long> getIdsWonFromIds(Set<Long> empireIds) {
         return empireIds.stream()
                 .map(id -> empireRepository.findById(id).orElseThrow())
                 .filter(e -> e.getWonSmallGalaxy() || e.getWonMediumGalaxy() || e.getWonLargeGalaxy())
-                .count();
+                .map(Empire::getId)
+                .collect(Collectors.toSet());
     }
 }
