@@ -13,12 +13,14 @@ public class Statistic implements Comparable<Statistic> {
     private final int count;
     private final Set<Long> empireIds;
     private final int elo;
+    private final long wins;
 
-    Statistic(String name, int count, Set<Long> empireIds, int elo) {
+    Statistic(String name, int count, Set<Long> empireIds, int elo, long wins) {
         this.name = name;
         this.count = count;
         this.empireIds = empireIds;
         this.elo = elo;
+        this.wins = wins;
     }
 
     @Override
