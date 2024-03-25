@@ -14,7 +14,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
     <script src="/js/empireForm.js"></script>
-    <script src="/js/statistics.js"></script>
     <script src="/js/dataTablesInit.js"></script>
 </head>
 <body class="main-body">
@@ -36,18 +35,5 @@
     </div>
     <script src="/js/empireTable.js"></script>
 </div>
-<script th:inline="none">
-    $(window).on('load', function() {
-        // Initialize DataTables for any '.stats-table' elements
-        // This script runs on every full page load, ensuring fresh initialization
-        $('.stats-table').each(function() {
-            if (!$.fn.DataTable.isDataTable(this)) {
-                $(this).DataTable({
-                    "order": [] // DataTables configuration options here
-                });
-            }
-        });
-    });
-</script>
 </body>
 </html>
