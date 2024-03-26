@@ -8,7 +8,6 @@
         <label for="name">Empire Name:</label>
         <input id="name" name="name" th:value="*{name}" type="text"/>
 
-        <!-- Species Information -->
         <label for="speciesName">Species Name:</label>
         <input id="speciesName" name="species.name" th:value="*{species.name}" type="text"/>
 
@@ -31,7 +30,6 @@
             </option>
         </select>
 
-        <!-- Homeworld Information -->
         <label for="homeworldName">Homeworld Name:</label>
         <input id="homeworldName" name="homeworld.homeworldName" th:value="*{homeworld.homeworldName}" type="text"/>
 
@@ -55,7 +53,6 @@
             </option>
         </select>
 
-        <!-- Government Information -->
         <label for="ethics">Ethics:</label>
         <select id="ethics" multiple="multiple" name="ethics">
             <option th:each="ethic : ${ethics}"
@@ -93,7 +90,6 @@
             </option>
         </select>
 
-        <!-- Game Victory Information -->
         <div class="form-group">
             <label for="wonSmallGalaxy">Won Small Galaxy Game:</label>
             <input id="wonSmallGalaxy" name="wonSmallGalaxy" th:checked="*{wonSmallGalaxy}" type="checkbox"/>
