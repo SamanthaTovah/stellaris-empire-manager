@@ -165,6 +165,9 @@ public class EmpireController extends ApplicationController {
             Empire oldEmpire = empireRepository.findById(id).orElseThrow();
             log.info("Editing existing empire (id: {}, old name: {})",
                     id, oldEmpire.getName());
+            if (empire.getWonSmallGalaxy() || empire.getWonMediumGalaxy() || empire.getWonLargeGalaxy()) {
+                throw new EmpireException("Cannot edit empire " + empire.getName() + ": it has won at least one game.");
+            }
             empire.setElo(oldEmpire.getElo());
             empire.setEloComparisons(oldEmpire.getEloComparisons());
         } else {
@@ -181,6 +184,10 @@ public class EmpireController extends ApplicationController {
     @DeleteMapping("/delete-empire/{id}")
     @ResponseBody
     public String deleteEmpire(@PathVariable("id") Long id) {
+        Empire empire = empireRepository.findById(id).orElseThrow();
+        if (empire.getWonSmallGalaxy() || empire.getWonMediumGalaxy() || empire.getWonLargeGalaxy()) {
+            throw new EmpireException("Cannot delete empire " + empire.getName() + ": it has won at least one game.");
+        }
         empireRepository.deleteById(id);
 
         return "redirect:/empires";
