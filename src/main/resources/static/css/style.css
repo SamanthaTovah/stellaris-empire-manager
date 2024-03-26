@@ -152,13 +152,14 @@ h1, h2 {
 }
 
 .empire {
-    flex: 1;
+    flex-grow: 1;
+    flex-basis: 0;
     margin: 10px;
     border: 1px solid #ccc;
     padding: 20px;
-    width: 45%;
+    box-sizing: border-box;
     cursor: pointer;
-    text-align:center;
+    text-align: center;
 }
 
 .image-container {
