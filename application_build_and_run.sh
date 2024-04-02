@@ -1,14 +1,13 @@
 #!/bin/bash
 
-# Kill existing running container
-docker ps -a --filter ancestor=stellaris-empire-manager --format {{.Names}} | xargs -r docker rm -f
+IMAGE_NAME=stellaris-empire-manager
 
-# Build JAR for the image
-./mvnw clean package -DskipTests
+# Kill existing running container
+docker ps -a --filter ancestor=${IMAGE_NAME} --format {{.Names}} | xargs -r docker rm -f
 
 # Build the Docker image
-docker build -t stellaris-empire-manager .
+docker build -t ${IMAGE_NAME} .
 
 # Run the Docker container
 docker run -d --network stellaris-network -p 8080:8080 -e SPRING_PROFILES_ACTIVE=docker \
-  stellaris-empire-manager:latest
+  ${IMAGE_NAME}:latest

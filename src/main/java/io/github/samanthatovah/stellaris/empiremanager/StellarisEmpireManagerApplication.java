@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -20,7 +19,6 @@ import javax.sql.DataSource;
 @EntityScan("io.github.samanthatovah.stellaris.empiremanager.domain")
 @EnableJpaRepositories(basePackages = "io.github.samanthatovah.stellaris.empiremanager.domain")
 @Import(SecurityConfig.class)
-@PropertySource("git.properties")
 public class StellarisEmpireManagerApplication {
 
     public static void main(String[] args) {

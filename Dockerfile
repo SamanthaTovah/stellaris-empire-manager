@@ -1,20 +1,17 @@
+# Build stage
+FROM jelastic/maven:3.9.5-openjdk-21 AS builder
+WORKDIR /app
+# Copy your source code and build the application
+COPY . .
+RUN mvn clean package -DskipTests
+
+# Run stage
 FROM eclipse-temurin:21-jdk
-
 LABEL maintainer="samantha.tovah@gmail.com"
-
 VOLUME /tmp
-
 EXPOSE 8080
-
-# ENV because it is used in ENTRYPOINT command
-ENV JAR_FULL_NAME=stellaris-empire-manager-0.0.1-SNAPSHOT.jar
-ARG JAR_FILE="target/${JAR_FULL_NAME}"
-ADD ${JAR_FILE} ${JAR_FULL_NAME}
-
-# Ensure the script is copied to the root directory of the container
-COPY entrypoint.sh /entrypoint.sh
-
-# Ensure the script is executable
-RUN chmod +x /entrypoint.sh
-
-ENTRYPOINT ["/entrypoint.sh"]
+ENV JAR_FULL_NAME stellaris-empire-manager-0.0.1-SNAPSHOT.jar
+# Copy the built JAR file from the build stage
+COPY --from=builder /app/target/${JAR_FULL_NAME} /${JAR_FULL_NAME}
+COPY start.sh /start.sh
+ENTRYPOINT ["/start.sh"]

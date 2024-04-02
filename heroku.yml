@@ -1,0 +1,10 @@
+setup:
+  addons:
+    - plan: jawsdb:kitefin
+      as: DATABASE
+  config:
+    SPRING_PROFILES_ACTIVE: heroku
+
+build:
+  docker:
+    web: Dockerfile
