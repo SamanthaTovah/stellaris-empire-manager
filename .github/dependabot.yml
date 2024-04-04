@@ -11,4 +11,3 @@ updates:
       interval: "weekly"
     labels:
       - "dependencies" # Label for pull requests
-      - "java"
