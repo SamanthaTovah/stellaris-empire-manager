@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 
 @Log4j2
 public abstract class ApplicationController {
+
     protected static final String MAIN_LAYOUT = "main-layout";
     protected static final String CONTENT = "content";
     @Value("${git.commit.id:unknown}")

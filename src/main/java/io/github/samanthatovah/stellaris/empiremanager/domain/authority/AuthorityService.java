@@ -1,12 +1,14 @@
 package io.github.samanthatovah.stellaris.empiremanager.domain.authority;
 
-import io.github.samanthatovah.stellaris.empiremanager.domain.statistic.Statistic;
-import io.github.samanthatovah.stellaris.empiremanager.domain.empire.Empire;
 import io.github.samanthatovah.stellaris.empiremanager.domain.empire.EmpireRepository;
+import io.github.samanthatovah.stellaris.empiremanager.domain.statistic.Statistic;
 import io.github.samanthatovah.stellaris.empiremanager.domain.statistic.StatisticFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,23 +22,19 @@ public class AuthorityService {
     }
 
     public List<Statistic> getCountStats() {
-        List<Authority> allAuthorities = Arrays.stream(Authority.values()).toList();
-        List<Statistic> stats = new ArrayList<>();
+        List<Object[]> rawData = empireRepository.findAuthorityStatistics();
+        List<Statistic> statistics = new ArrayList<>(statisticFactory.fromRaw(rawData));
 
-        for (Authority authority : allAuthorities) {
-            Set<Long> empireIds = getEmpireIds(authority);
-            stats.add(statisticFactory.createStatistic(authority.toString(), empireIds));
-        }
-
-        Collections.sort(stats);
-
-        return stats;
-    }
-
-    private Set<Long> getEmpireIds(Authority authority) {
-        return empireRepository.findAll().stream()
-                .filter(e -> e.getAuthority().equals(authority))
-                .map(Empire::getId)
+        Set<String> existingAuthorities = statistics.stream()
+                .map(Statistic::getName)
                 .collect(Collectors.toSet());
+
+        EnumSet.allOf(Authority.class).forEach(authority -> {
+            if (!existingAuthorities.contains(authority.name())) {
+                statistics.add(statisticFactory.createStatistic(authority.name()));
+            }
+        });
+
+        return statistics;
     }
 }

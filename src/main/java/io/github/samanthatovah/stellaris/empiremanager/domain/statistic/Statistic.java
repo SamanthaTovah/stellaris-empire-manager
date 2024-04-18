@@ -16,11 +16,11 @@ public class Statistic implements Comparable<Statistic> {
     private final int count;
     private final int wins;
 
-    Statistic(String name, int elo, Set<Long> empireIds, Set<Long> empireIdsWon) {
+    Statistic(String name, Set<Long> allEmpireIds, Set<Long> winningEmpireIds, int elo) {
         this.name = name;
         this.elo = elo;
-        this.empireIds = empireIds;
-        this.empireIdsWon = empireIdsWon;
+        this.empireIds = allEmpireIds;
+        this.empireIdsWon = winningEmpireIds;
         this.count = empireIds.size();
         this.wins = empireIdsWon.size();
     }
