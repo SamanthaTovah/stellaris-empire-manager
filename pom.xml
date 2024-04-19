@@ -10,7 +10,7 @@
     </parent>
     <groupId>io.github.samanthatovah</groupId>
     <artifactId>stellaris-empire-manager</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0</version>
     <name>Stellaris Empire Manager</name>
     <description>Application to manage Stellaris empires</description>
     <properties>
